@@ -14,6 +14,8 @@
   <div class="bio">
 
   </div>
+  <div class='baseball'>
+  </div>
 
 <script>
   const dict = {
@@ -22,8 +24,59 @@
     JS: 'JavaScript'
   };
 
+  function addAbbreviations(strings, ...values) {
+    const abbreviated = values.map(value => {
+      if(dict[value]) {
+        return `<abbr title = "${dict[value]}">${value}</abbr>`;
+      }
+      return value;
+    })
+    return strings.reduce((sentence,string,i) => {
+      return `${sentence}${string}${abbreviated[i] || ''}`;
+    }, '')
+  }
+
   const first = 'Wes';
   const last = 'Bos';
+  const sentence = addAbbreviations`Hello, my name is ${first} ${last} and I love to code ${'HTML'},
+  ${'CSS'}, and ${'JS'}`;
+
+  const bio = document.querySelector('.bio');
+  const p = document.createElement('p');
+  p.innerHTML = sentence;
+  bio.appendChild(p);
+
+  //My Example
+  const players = {
+    JK: 'Jason Kipnis',
+    FL: 'Francisco Lindor',
+    JR: 'Jose Ramirez'
+  };
+
+  function addDef(strings,...values) {
+    const slimmedDown = values.map(value => {
+      if(players[value]) {
+        return `<abbr title = "${players[value]}">${value}</abbr>`;
+      }
+      return value;
+    })
+    return strings.reduce((sentence,string,i) => {
+      return `${sentence}${string}${slimmedDown[i] || ''}`;
+    }, '');
+  }
+
+  const city = 'Cleveland';
+  const team = 'Indians';
+  const infield = addDef`The infield for the ${city} ${team} consists of All-Stars ${'JK'},
+  ${'FL'}, and ${'JR'}`
+
+  const sports = document.querySelector('.baseball');
+  const p2 = document.createElement('p');
+  p2.innerHTML = infield;
+  sports.appendChild(p2);
+
+
+
 
 </script>
 </body>

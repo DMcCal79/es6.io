@@ -5,6 +5,8 @@
   <title>Template Strings!</title>
 </head>
 <body>
+  <div class="wesExample"></div>
+  <div class="myExample"></div>
 <script>
   const dogs = [
     { name: 'Snickers', age: 2 },
@@ -12,6 +14,8 @@
     { name: 'Sunny', age: 1 }
   ];
 
+/*With ES6, you can have template strings within template strings.  This is
+extremely useful with looping.*/
   const markup = `
     <ul class="dogs">
       ${dogs.map(dog => `
@@ -22,7 +26,28 @@
         </li>`).join('')}
     </ul>
   `;
-  document.body.innerHTML = markup;
+  // document.body.innerHTML = markup;
+  const dogList = document.querySelector('.wesExample');
+  dogList.innerHTML = markup;
+
+  //My Example:
+  const pizzas = [
+    { size: 'small', crust: 'thin crust', topping: 'bacon' },
+    { size: 'medium', crust: 'hand-tossed', topping: 'ham' },
+    { size: 'large', crust: 'NY style', topping: 'pepperoni' },
+    { size: 'XL', crust: 'deep dish', topping: 'meatball' }
+  ];
+
+
+  const mealMarkup = `
+    <ul class="dinner">
+      ${pizzas.map(pizza => `
+        <li>${pizza.size} ${pizza.crust} with ${pizza.topping}</li>`).join('')}
+    </ul>
+  `;
+
+  const pizzaOrder = document.querySelector('.myExample');
+  pizzaOrder.innerHTML = mealMarkup;
 
 </script>
 </body>

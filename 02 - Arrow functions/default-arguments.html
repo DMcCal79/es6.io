@@ -6,12 +6,31 @@
 </head>
 <body>
 <script>
+/*With ES6, you can now define default arguments in the (). This function is the
+equivalent of writing:
+  function calulateBill(total, tax, tip) {
+    if(tax === undefined) {
+    tax = 0.13;
+    }
+    if(tip === undefined) {
+    tip = 0.15;
+   }
+   return total + (total * tax) + (total * tip);
+   }*/
   function calculateBill(total, tax = 0.13, tip = 0.15) {
     return total + (total * tax) + (total * tip);
   }
 
   const totalBill = calculateBill(100, undefined, 0.25);
   console.log(totalBill);
+
+  //My Example:
+  function wingOrder(number, type='boneless', sauce='buffalo',location) {
+	   return `I would like ${number} ${type} wings with ${sauce} sauce ${location} please.`;
+  }
+
+  const myOrder = wingOrder(36,undefined,'honey bbq','to go');
+  console.log(myOrder);
 </script>
 </body>
 </html>

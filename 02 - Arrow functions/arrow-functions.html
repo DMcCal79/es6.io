@@ -16,14 +16,19 @@
     return `${name} bos`;
   });
 
+//Parentheses not required if there's only one paremeter
   const fullNames3 = names.map(name => {
     return `${name} bos`;
   });
 
+//Can put entire function in one line and remove 'return' making it a implicit return.
   const fullNames4 = names.map(name => `${name} bos`);
 
   const fullNames5 = names.map(() => `cool bos`);
 
+/*Arrow functions are anonymous functions and must be used with const, let, or var.
+They cannot be put in a function declaration like function sayMyName(name)=>{..}
+Important to remember when considering hoisting.*/
   const sayMyName = (name) => {
     alert(`Hello ${name}!`)
   }

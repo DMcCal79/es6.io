@@ -13,6 +13,11 @@
 
 <script>
   // When you really need `this`
+  /*Using an arrow function here would result in this referencing the window
+  object. This is because 'this' does not get re-bound within the funtion with
+  arrow functions. Instead, 'this' is inherited from the parent scope. Here
+  it's better to use funtion(){..} so that 'this' can be re-bound within the
+  function.*/
   const button = document.querySelector('#pushy');
   button.addEventListener('click', function() {
     console.log(this);
@@ -20,6 +25,11 @@
   });
 
   // When you need a method to bind to an object
+  /*Similar situation here as above. Using an arrow function here would result
+  in 'this' referencing the window object since 'this' can't be re-bound within an
+  arrow function. With arrow functions, 'this' is inherited from the parent scope.
+  Using score:function(){...} (or score() as written here) would be the way to
+  go.*/
   const person = {
     points: 23,
     score() {
@@ -29,6 +39,10 @@
   }
 
   // When you need to add a prototype method
+  /*Again, using an arrow function in the summarize method would result in
+  'this' referencing the window object since 'this' can't be re-bound within an
+  arrow function. You would again use funtion(){...} so that 'this' can be
+  re-bound within the function and point to the object instead of the window.*/
   class Car {
     constructor(make, colour) {
       this.make = make;
@@ -43,13 +57,31 @@
      return `This car is a ${this.make} in the colour ${this.colour}`;
   };
 
+  //My example:
+  class Pizza {
+    constructor(size,topping) {
+      this.size = size;
+      this.topping = topping;
+    }
+  }
+
+  const Dominos = new Pizza('medium', 'ham');
+  const DoubleDaves = new Pizza('large', 'bacon');
+
+  Pizza.prototype.order = function() {
+    return `I would like a ${this.size} pizza with ${this.topping} please.`;
+  };
+
   // When you need arguments object
+  /*Arrow functions do not work with the arguments object. Using an arrow function
+  here results in a ReferenceError.  Using function(){...} is the way to go when
+  using the arguments object.*/
   const orderChildren = function() {
     const children = Array.from(arguments);
     return children.map((child, i) => {
       return `${child} was child #${i + 1}`;
     })
-    console.log(arguments);
+    // console.log(arguments);
   }
 
 

@@ -5,6 +5,8 @@
   <title>Template Strings!</title>
 </head>
 <body>
+  <div class="wesExample"></div>
+  <div class="myExample"></div>
 <script>
   const beer = {
     name: 'Belgian Wit',
@@ -20,6 +22,9 @@
     `;
   }
 
+/*With ES6, you can also run a function within a template string.  Here, the
+renderKeywords function is run within a template string.  This helps keep the code
+cleaner by avoiding having multiple template strings running within eachother.*/
   const markup = `
     <div class="beer">
       <h2>${beer.name}</h2>
@@ -27,8 +32,37 @@
       ${renderKeywords(beer.keywords)}
     </div>
   `;
+  const beerList = document.querySelector('.wesExample');
+  // document.body.innerHTML = markup;
+  beerList.innerHTML = markup;
 
-  document.body.innerHTML = markup;
+  //My Example:
+  const corvette = {
+    make: 'Chevy',
+    model: 'Corvette',
+    color: 'Black',
+    horsepower: 400,
+    keywords:['fast','cool','muscle','loud']
+  }
+
+  function showKeywords(keywords) {
+    return `
+      <ul>
+        ${keywords.map(keyword => `
+          <li>${keyword}</li>`).join('')}
+      </ul>
+    `
+  }
+
+  const myMarkup = `
+    <div class="garage">
+      <h2>${corvette.make} ${corvette.model}</h2>
+      ${showKeywords(corvette.keywords)}
+    </div>
+    `;
+
+    const carList = document.querySelector('.myExample');
+    carList.innerHTML = myMarkup;
 
 </script>
 </body>

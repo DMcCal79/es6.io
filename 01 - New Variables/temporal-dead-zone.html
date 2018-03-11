@@ -6,6 +6,9 @@
 </head>
 <body>
 <script>
+
+/*Results in Reference error with const; results in undefined with var.  The
+temporal dead zone is not being able to access a variable before it is defined.*/
   console.log(pizza);
   const pizza = 'Deep Dish 🍕🍕🍕';
 

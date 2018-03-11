@@ -10,11 +10,13 @@
   let points = 50;
   let winner = false;
 
+  //Can't change object since it is const.  CAN change properties(ex person.name)
   const person = {
     name: 'Wes',
     age: 28
   }
 
+  //This will prevent properties from being changed (changes writable to false)
   const wes = Object.freeze(person);
 
 </script>

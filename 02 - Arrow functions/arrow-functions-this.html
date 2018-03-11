@@ -62,20 +62,31 @@
 
   <script>
     const box = document.querySelector('.box');
+    /*Using an arrow function here would reference the window object since the
+    value of 'this' does not get re-bound within the function with arrow functions.
+    Instead, 'this' is inherited from the parent scope. In this case, it's better to
+    use funtion(){..} instead of an arrow function*/
     box.addEventListener('click', function() {
       let first = 'opening';
       let second = 'open';
 
-      if(this.classList.contains(first)) {
-        [first, second] = [second, first];
+      /*This will check to see if the box is already openned. If so it reverses the
+      order of events making the text disappear and then the box shrinking. Using
+      ES6 destructuring, thd values of first and second are switched if the box
+      is already openned.*/
+      if (this.classList.contains(first)) {
+        [first,second] = [second,first];
       }
 
       this.classList.toggle(first);
-      setTimeout(() => {
-        console.log(this);
+    /*Using function(){..} in the setTimeout would result in 'this' referencing the
+    window object since it's a new function. However, using an arrow function would
+    result in this binding to box since arrow functions inherit 'this' from the
+    parent scope.*/
+      setTimeout(()=> {
         this.classList.toggle(second);
-      }, 500);
-    });
+      },500);
+    })
   </script>
 
 </body>

@@ -16,13 +16,27 @@ const model = 'x5';
 const colour = 'Royal Blue';
 
 // .startsWith()
+//Checks to see if course starts with 'R'. Is case-sensitive
+course.startsWith('R');
+//Checks to see if flightNumber starts with 'A' after the 3rd character in the string.
+flightNumber.startsWith('A',3);
 
 // .endsWith()
+//Checks to see if accountNumber ends with '1'.  Is case-sensitive.
+accountNumber.endsWith('1');
+//Checks the first 11 characters of accountNumber to see if they end with'RT'.
+accountNumber.endsWith('RT',11);
 
 // .includes()
+//Checks flighNumber to se if it includes the letter 'C' anywhere.  Is case-sensitive.
+flightNumber.includes('C');
 
 // .repeat()
+//Will repeat the letter 'Z' 50 times.
+'Z'.repeat(50);
 
+/*This function that Wes created uses .repeat() to align the make, model, and
+colour variable to the right. */
 function leftPad(str, length = 20) {
   return `→ ${' '.repeat(length - str.length)}${str}`;
 }
@@ -31,6 +45,20 @@ console.log(leftPad(make));
 console.log(leftPad(model));
 console.log(leftPad(colour));
 
+//My example
+const who = "All";
+const direction = "downhill";
+const home = "from";
+const where = "here";
+
+function slope(str,angle) {
+  return `👍 ${' '.repeat(angle)}${str}`;
+};
+
+console.log(slope(who,20));
+console.log(slope(direction,35));
+console.log(slope(home,50));
+console.log(slope(where,65));
 
 </script>
 

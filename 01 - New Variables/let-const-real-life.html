@@ -6,11 +6,16 @@
 </head>
 <body>
 <script>
+
+  /*Wrapping const name with {} allows it to be block scoped.  IIFE's are no
+  longer needed */
   {
     const name = 'wes';
     console.log(name);
   }
 
+  /*Using let will allow i to be blocked scoped which will prevent i from being
+  overwritten each interal. Using var would have just caused 10 to be logged 10 times.*/
   for(let i = 0; i < 10; i++) {
     console.log(i);
     setTimeout(function() {

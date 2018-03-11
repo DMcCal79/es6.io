@@ -10,7 +10,16 @@
   </style>
 </head>
 <body>
+  <div class="wesExample"></div>
+  <div class="myExample"></div>
+  <div class="otherExample"></div>
+
 <script>
+  /*With tagging, I can run the string through the highlight function before
+  assigning it to a variable (const sentence). Tagging first breaks up the string
+  into the biggest value possible before it's interupted by variable. In this
+  case, the string is broken up into 3 pieces and 2 variables.  There will always
+  be 1 more string than variable.*/
   function highlight(strings, ...values) {
     let str = '';
     strings.forEach((string, i) => {
@@ -23,8 +32,53 @@
   const age = 100;
 
   const sentence = highlight`My dog's name is ${name} and he is ${age} years old`;
-  document.body.innerHTML = sentence;
+  const wes = document.querySelector('.wesExample');
+  wes.innerHTML = sentence;
   console.log(sentence);
+
+  //My example:
+  function choices(strings, ...values) {
+    let str = '';
+    strings.forEach((string,i) => {
+      str += `${string} <span class="hl" contenteditable>${values[i] || ''}</span>`;
+    })
+    return str;
+  }
+
+
+
+  const bbq = 'ribs';
+  const qty = 'slab';
+  const sideDish = 'beans';
+
+  const order = choices`I would like to order a ${qty} of ${bbq} with a side of ${sideDish}.`;
+  const mine = document.querySelector('.myExample');
+  mine.innerHTML = order;
+  console.log(order);
+
+  //My other example
+  function champion(strings, ...values) {
+    let str = '';
+    strings.forEach((string,i) => {
+      str += `${string} <span class="hl" contenteditable>${values[i] || ''}</span>`;
+    })
+    return str;
+  }
+
+
+  const winner = 'Indians';
+  const loser = 'Dodgers';
+  const games = 'six';
+  const year = 2018;
+
+
+  const baseball = champion `I predict that the ${winner} will defeat the ${loser} in
+  ${games} in the ${year} World Series.`;
+
+  const otherExample = document.querySelector('.otherExample');
+  otherExample.innerHTML = baseball;
+
+
 
 </script>
 </body>
