@@ -14,6 +14,12 @@
     twitter: '@wesbos'
   };
 
+/*Destructuring makes it easier to store object properties into variables. The
+syntax is: const(or var,let) { property(s) to extract } = object to destructure.
+Without destructuring,the example below would have to be written as:
+const first = person.first;
+const last = person.last;
+const twitter = person.twitter;*/
   const { first, last, twitter } = person;
 
   const wes = {
@@ -30,10 +36,35 @@
     }
   };
 
+/*Wes's example below shows how to destructure nested objects and also change
+the variable name. The syntax for changing the variable name is:
+const { property:new name to use for variable } = object to destructure*/
   const { twitter: tweet, facebook: fb } = wes.links.social;
 
   const settings = { width: 300, color: 'black' }  // height, fontSize
+
+/*In Wes's example below, default values are being set for each varibale. However,
+if the property is already found on the object being destructured, then the
+default value will be overwritten by the value found in the object. For example,
+width would actually be 300 instead of 100 since it's found in the settings object.
+However, height would be set to 100 since it is not on the settings object.*/
   const { width = 100, height = 100, color = 'blue', fontSize = 25} = settings;
+
+//My example:
+const fridge = {
+healthy: {
+	 fruit: {
+		   apples: "Golden Delicious",
+		     berries: "Blueberries"
+       },
+     }
+};
+
+/*This will pull the nested properties apples and berries and then change the
+variable names to store them in to snack and breakfast. */
+const { apples:snack, berries:breakfast } = fridge.healthy.fruit;
+
+
 
 </script>
 </body>

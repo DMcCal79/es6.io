@@ -7,15 +7,31 @@
 <body>
 <script>
   const details = ['Wes Bos', 123, 'wesbos.com'];
+  /*The example below will take all 3 items in the details array and store them in
+  name, id, and website.  The array destructuring syntax is
+  const (or let or var) [variable for index 0,variable for index 1, variable for index2] = array to destructure*/
   const [name, id, website] = details;
   console.log(name, id, website);
 
   const data = 'Basketball,Sports,90210,23,wes,bos,cool';
+  /*Using .split() will split each item after the comma and return an Array. The
+  split method is used passing in a character to use as a separator in the ().
+  */
   const [itemName, category, sku, inventory] = data.split(',');
 
   const team = ['Wes', 'Harry', 'Sarah', 'Keegan', 'Riker'];
 
+/*Using ...players (spread operator) will store the rest of the players
+ after Harry into a separate variable.  In this case, Sarah, Keegan, and Riker
+ are all stored in the players variable.*/
   const [captain, assistant, ...players] = team;
+
+  //My example:
+
+const list = 'chicken biscuit, fajitas, pizza, jerky, cake';
+const[ breakfast, lunch, dinner, ...snacks ] = list.split(',');
+
+
 
 </script>
 </body>

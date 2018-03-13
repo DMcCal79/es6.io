@@ -6,6 +6,10 @@
 </head>
 <body>
 <script>
+/*You can return several values at once from a function by making them properties
+of an object. In the this example, convertCurrency will return an object which can be
+destructured into several variables containing the multiple values returned by the
+object.*/
   function convertCurrency(amount) {
     const converted = {
       USD: amount * 0.76,
@@ -15,13 +19,38 @@
     };
     return converted;
   }
+/*Here,the returned object is destructured so that the multiple values returned
+can be stored in multiple variables.  Since an object is being returned, you can
+actually put the property names in any order when destructing and the correct
+property/value pair will still be returned.*/
+  const { USD, GPB, AUD, MEX } = convertCurrency(100);
 
+/*When using default value arguments, you can pass them as an object by wrapping
+them with {}. This will allow you to be able to pass in agruments in any order
+since they're being passed as property/value pairs of an object.  You also don't
+have to pass in undefined for arguments that you wish to use the default value.
+For example, if I wanted to keep the tip at the default .15 but enter different
+values for everything else, then I can simply just pass
+tipCalc({total:200, tax:.15}{...}  Without ES6, I would need to enter:
+tipCalc(total = 100, undefined, tax=.2){..}. Adding the ={} after the arguments
+will allow you to be able to call the function by tipCalc() if you wish to keep all of
+the arguments equaling the defaults. */
   function tipCalc({ total = 100, tip = 0.15, tax = 0.13 } = {}) {
     return total + (tip * total) + (tax * total);
   }
 
   const bill = tipCalc({ tip: 0.20, total: 200 });
   console.log(bill);
+
+//My example:
+function baseball({ab = 100, hits = 20, rbi = 30} ={}) {
+ console.log(`He batted ${Math.round((hits/ab)*1000)} and had ${rbi} rbi's this spring.`);
+};
+
+const playerA = baseball({rbi: 70});
+const playerB = baseball({ab: 180, hits: 60});
+const playerC = baseball();
+
 
 </script>
 </body>

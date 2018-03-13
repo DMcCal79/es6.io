@@ -10,8 +10,18 @@
   let onSide = 'The Rock';
 
   console.log(inRing, onSide);
+  /*Wes's example below shows how you have a couple of variables switch their values
+  with eachother  Here, inRing is now The Rock while onSide is now Hulk Hogan. */
   [inRing, onSide] = [onSide, inRing];
   console.log(inRing, onSide);
+
+  //My example:
+  let dinner = 'pizza';
+  let desert = 'ice cream';
+  console.log(dinner,desert);
+  //This results in dinner now equaling ice cream and desert now equaling desert.
+  [dinner, desert] = [desert, dinner];
+  console.log(dinner, desert)
 
 </script>
 </body>
