@@ -14,6 +14,15 @@
     sugar: 10
   };
 
+/*Currently, the for of loop will not work with getting the values for properties
+of an object.  However, there is a workaround using .keys as seen below.*/
+  for(const sauce of Object.keys(apple)) {
+    console.log(apple[sauce]);
+  };
+
+/*Another way would be to just use the for in loop as seen below.  Either way will
+work.  However, Wes recommends using the for in loop when needing to 
+iterate over the values of an object.*/
   for (const prop in apple) {
     const value = apple[prop];
     console.log(value, prop);

@@ -18,32 +18,53 @@
 <script>
   const cuts = ['Chuck', 'Brisket', 'Shank', 'Short Rib'];
 
-  // for (const [i, cut] of cuts.entries()) {
-  //   console.log(`${cut} is the ${i + 1} item`);
-  // }
+/*In this example,cuts.entries returns an interator.  Looping over the interator
+will return an array for each iteration with a length of 2 containing an index
+and the value for each iteration.  For example, the first iteration would
+return [0,'Chuck'].
 
-  // function addUpNumbers() {
-  //   let total = 0;
-  //   for (const num of arguments) {
-  //     total += num;
-  //   }
-  //   console.log(total);
-  //   return total;
-  // }
+Here, Wes uses destructing right off the bat to put the index and value for forEach
+interation into their own variables.*/
+  for (const [i, cut] of cuts.entries()) {
+    console.log(`${cut} is the ${i + 1} item`);
+  }
 
-  // addUpNumbers(10,23,52,34,12,13,123);
+/*In this example, the for of loop interates over any arguments that passed into the
+function and then adds them together.  The arguments object is an array-like object
+that represents the arguments passed into the function.*/
 
-  // const name = 'Wes Bos';
-  // for (const char of name) {
-  //   console.log(char);
-  // }
+  function addUpNumbers() {
+    let total = 0;
+    for (const num of arguments) {
+      total += num;
+    }
+    console.log(total);
+    return total;
+  }
 
+  addUpNumbers(10,23,52,34,12,13,123);
+
+/*A for of loop can also be used to interate over a string.  */
+  const name = 'Wes Bos';
+  for (const char of name) {
+    console.log(char);
+  }
+
+//The for of loop is great for itrating over node lists.
   const ps = document.querySelectorAll('p');
   for (const paragraph of ps) {
     paragraph.addEventListener('click', function() {
       console.log(this.textContent);
     });
   }
+
+//My example:
+
+const colors = ['red','blue','green','purple','gold'];
+for(color of colors.entries()) {
+  const [i,val] = color;
+  console.log(`The color ${val} has an index of ${i}.`);
+};
 
 </script>
 </body>

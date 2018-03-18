@@ -18,6 +18,10 @@
     }
     return this;
   };
+/*The nice thing about using a for of loop on cuts is that it would ignore the
+newly added shop property and just interate over Chuck, Brisket, Shank, and
+Short Rib.  Using a for in loop would iterate over everything inlcuding the
+shop property as well as any functions that were added to the Array.protoype.*/
 
   const cuts = ['Chuck', 'Brisket', 'Shank', 'Short Rib'];
 
@@ -38,11 +42,23 @@
   //   console.log(cuts[index]);
   // }
 
+/*The for of loop also allows for continue and break to be used.  This is great
+since you can't use break or continue with forEach. */
   for (const cut of cuts) {
     if(cut === 'Brisket') {
       continue;
     }
     console.log(cut);
+  }
+
+//My example:
+  const cookies = ['chocolate', 'PB', 'Oatmeal'];
+  cookies.hello = function(){console.log('Hello');};
+
+/*Using the for of loop here will only interate over chocolate, PB, and Oatmeal.
+It will ignore the hello function property that was added.*/
+  for (const snack of cookies) {
+    console.log(`Time to eat some ${snack} cookies!`);
   }
 
 </script>
