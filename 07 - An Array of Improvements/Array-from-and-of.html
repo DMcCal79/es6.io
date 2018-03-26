@@ -11,14 +11,25 @@
   </div>
 <body>
 <script>
-  // const people = document.querySelectorAll('.people p');
-  // const peopleArray = Array.from(people, person => {
-  //   console.log(person);
-  //   return person.textContent;
-  // });
-  // console.log(peopleArray);
 
-  // // const names = people.map(person => person.textContent);
+/*Array.from() will turn an "array-ish" item into an array.  In Wes's example
+below, const people will return a node list, not a true array.  However,
+Array.from(people) will convert const people from a node list to a true array.*/
+  const people = document.querySelectorAll('.people p');
+/*Array.from allows you to to pass a map function as a second argument so that you
+can go ahead and run the map function without having to first store the newly
+created array in a separate variable first.  In other words, you wouldn't need
+to create const names = people.map(person => person.textContent).  You could
+instead run the code below and accomplish both at once:*/
+  const peopleArray = Array.from(people, person => {
+    return person.textContent;
+  });
+  console.log(peopleArray);
+
+/*In the example below, the arguments object is array-ish but not really a true
+array.  Using Array.from(arguments) will convert the arguments object into  a true
+array so theat .reduce() and be applied to it.*/
+
 
   function sumAll() {
     const nums = Array.from(arguments);
@@ -27,6 +38,8 @@
 
   sumAll(2, 34, 23, 234, 234, 234234, 234234, 2342);
 
+  /*Array.of() allows you to immediate create an array out of whatever arguements
+  you pass in.*/
   const ages = Array.of(12,4,23,62,34);
   console.log(ages);
 

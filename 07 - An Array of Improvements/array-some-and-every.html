@@ -8,9 +8,17 @@
 <script>
   const ages = [32, 15, 19, 12];
 
+  /*The Array.some() method takes a callback function (test) as a parameter and
+  will check each item in an array until a true value is returned.  Once a true
+  value is returned,the Array.some() method will stop running.*/
+
   // 👵👨 is there at least one adult in the group?
   const adultPresent = ages.some(age => age >= 18);
   console.log(adultPresent);
+
+  /*The Array.every() method is similar to Array.some only it checks to see if
+  ALL of the elements in the array pass the test provided in the callback
+  function.*/
 
   // 🍻 is everyone old enough to drink?
   const allOldEnough = ages.every(age => age >= 19);

@@ -177,11 +177,26 @@
         "display_src":"https://scontent.cdninstagram.com/hphotos-xpt1/t51.2885-15/e35/11326072_550275398458202_1726754023_n.jpg"
      }
   ];
+
+/*Both Array.find and Array.Index take a call-back function as a parameter specifying
+the criteria for too look for when interating through the array.*/
   const code = 'VBgtGQcSf';
   const post = posts.find(post => post.code === code);
 
   const postIndex = posts.findIndex(post => post.code === code);
   console.log(postIndex);
+
+  /*MyExample*/
+  //Finds the post that has the word 'breakfast' in the caption.
+  const breakfast = posts.find(post => post.caption.includes('breakfast'));
+  //Finds the index of the post that contains 'breakfast' in the caption.
+  const breakfastIndex = posts.findIndex(post => post.caption.includes('breakfast'));
+ /*This function uses .splice to delete that post that contains 'breakfsst' in
+ the caption.*/
+  function goodBye() {
+    posts.splice(breakfastIndex,1);
+    return posts;
+  }
 
 </script>
 </body>
