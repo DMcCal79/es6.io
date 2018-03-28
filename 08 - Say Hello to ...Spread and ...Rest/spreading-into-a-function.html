@@ -8,19 +8,33 @@
 <script>
   const inventors = ['Einstein', 'Newton', 'Galileo'];
   const newInventors = ['Musk', 'Jobs'];
+  /*You can use the ...Spread operator to spread arguements into a function. In
+  Wes's example below, simply using inventors.push(newInventors) would result in
+  the newInventors array being nested within the inventors array.  However, using
+  ...newInventors will allow 'Musk' & 'Jobs' to be added to the inventors array
+  individually and not in a nested array.*/
   inventors.push(...newInventors);
   console.log(inventors);
 
   const name = ['Wes', 'Bos'];
-
+ /*Same thing here, using the ..Spread operator to pass the contents of the name
+ array as arguments into the sayHi function.*/
   function sayHi(first, last) {
     alert(`Hey there ${first} ${last}`);
   }
 
   sayHi(...name);
 
+  //My example:
+  const pizza = ['large', 'pepperoni', 'thin'];
+
+  function zaOrder(size, topping, crust) {
+    alert(`Thank you for your order! Your ${size} ${topping} pizza on ${crust} crust is in the oven!`);
+  }
+
+  zaOrder(...pizza);
+
+
 </script>
 </body>
 </html>
-
-

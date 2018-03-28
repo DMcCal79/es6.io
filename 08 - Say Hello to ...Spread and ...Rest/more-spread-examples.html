@@ -11,6 +11,10 @@
     <p>Randy</p>
   </div>
 <script>
+/*An alternative to using Array.from to convert const people from a node list
+to array would be to use the Spread operator like so:*/
+  const people2 = [...document.querySelectorAll('.people p')];
+
   const people = Array.from(document.querySelectorAll('.people p'));
   const names = people.map((person) => person.textContent );
 
@@ -19,7 +23,8 @@
     size: 'Medium',
     ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
   };
-
+/*This example is showing how you can use the ...Spread operator to spread the
+contents of an array that's an object property into a new array.*/
   const shoppingList = ['Milk', 'Flour', ...deepDish.ingredients];
   // console.log(shoppingList);
 
@@ -31,9 +36,26 @@
   ];
   const id = 632429;
   const commentIndex = comments.findIndex(comment => comment.id === id);
-
+/*In this example, Wes demonstrates how to use the ...Spread operator to combine
+the items of an array before and after the deleted item to form a new array.*/
   const newComments = [...comments.slice(0,commentIndex), ...comments.slice(commentIndex + 1)];
   console.log(newComments);
+
+ //My Example:
+
+  const startingRotation = [
+    { name: "Kluber", era: 2.55 },
+    { name: "Carrasco", era: 3.15 },
+    { name: "Bauer", era: 3.25 },
+    { name: "Salazar", era: 4.25 },
+    { name: "Clevinger" , era: 3.55 },
+    { name: "Tomlin", era: 3.65 }
+  ]
+//Find the pitcher who's ERA is greater than 3.99
+  const bullpen = startingRotation.findIndex(pitcher => pitcher.era > 3.99);
+//Remove that pitcher from the rotation
+  const finalRotation = [...startingRotation.slice(0,bullpen),
+                          ...startingRotation.slice(bullpen+1)];
 
 </script>
 </body>

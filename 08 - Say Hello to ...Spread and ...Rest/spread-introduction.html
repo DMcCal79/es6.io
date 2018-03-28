@@ -6,6 +6,15 @@
 </head>
 <body>
 <script>
+/*The ...spread operator will take every item in an iterable and put it into a
+new array. In Wes's example below, the featured and specialy arrays are combined
+together to form the pizza array. In pre-ES6, you would need accomplish this by
+using .concat like so:
+  var pizzas = [];
+  pizzas = pizzas.concat(featured);
+  pizzas.push('veg');
+  pizzas = pizzas.concat(specialty);
+Using the ...spread operator allows for cleaner code with fewer lines.*/
 
   const featured = ['Deep Dish', 'Pepperoni', 'Hawaiian'];
   const specialty = ['Meatzza', 'Spicy Mama', 'Margherita'];

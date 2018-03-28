@@ -6,14 +6,22 @@
 </head>
 <body>
 <script>
-  // function convertCurrency(rate, tax, tip, ...amounts) {
-  //   console.log(rate, tax, tip, amounts);
-  //   return amounts.map(amount => amount * rate);
-  // }
+/*The ...Rest operator looks similar to the ...Spread operator but actually does
+the opposite.  While the ...Spread operator 'unpacks' items from an array, the
+...Rest operator 'packs' items into an array.  In Wes's example below, the first
+3 arguments will be assigned to rate, tax, and tip respectively. However, any
+arguments passed after that will be placed into an array called amounts.*/
+  function convertCurrency(rate, tax, tip, ...amounts) {
+    console.log(rate, tax, tip, amounts);
+    return amounts.map(amount => amount * rate);
+  }
 
-  // const amounts = convertCurrency(1.54, 10, 23, 52, 1, 56);
-  // console.log(amounts);
+  const amounts = convertCurrency(1.54, 10, 23, 52, 1, 56);
+  console.log(amounts);
 
+/*Another helpful use case for the ...Rest operator is with destructuring. In Wes's
+runner array below, the first 2 items are assigned to the name and id variables
+respectively. However, any items after that are assigned to an array called runs.*/
   const runner = ['Wes Bos', 123, 5.5, 5, 3, 6, 35];
   const [name, id, ...runs] = runner;
   console.log(name, id, runs);
@@ -21,6 +29,16 @@
   const team = ['Wes', 'Kait', 'Lux', 'Sheena', 'Kelly'];
   const [captain, assistant, ...players] = team;
   console.log(captain, assistant, players)
+
+// My example:
+function batting(player, ...results) {
+  results.forEach((result,i) => {
+    console.log(`${player} AB ${i+1}: ${result}`);
+  })
+}
+
+batting('Kipnis','double','walk','home run','double');
+
 
 </script>
 </body>
