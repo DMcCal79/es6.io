@@ -39,6 +39,23 @@ function batting(player, ...results) {
 
 batting('Kipnis','double','walk','home run','double');
 
+//Another example:
+const lineup = ['Lindor','Kipnis','Ramirez','Alonso','Encarnacion','Chisenhall',
+'Gomes','Naquin','Zimmer'];
+
+/*This funtion packs each plate appearance passed into an array called results
+using the ...Rest operator.  Each batter in the lineup array is iterated over
+and then the result with the coresponding i from the results array is returned.*/
+
+function game (batters,...results) {
+  return batters.map((batter,i) => {
+    return `${i+1}: ${batter} outcome: ${results[i]}`;
+  });
+};
+
+const openingDay = game(lineup,'single','double','SO','HR','flyout','groundout','single','groundout','SO');
+openingDay.forEach(appearance => console.log(appearance));
+
 
 </script>
 </body>
