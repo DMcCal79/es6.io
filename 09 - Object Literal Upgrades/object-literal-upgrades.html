@@ -10,6 +10,9 @@
   const last = 'bos';
   const age = 2;
   const breed = 'King Charles Cav';
+  /*If the property and variable that your're setting it to have the same name,
+  then you can just list the name once. In other words, instead of saying
+  'last:last', you can just say 'last'.*/
   const dog = {
     firstName: first,
     last,
@@ -18,7 +21,10 @@
     pals: ['Hugo', 'Sunny']
   };
   console.log(dog);
-
+ /*With ES6, it is not necessary to declare a method with the 'myMethod: function(){..}'
+ syantax. You can instead just say 'myMethod(){...}'.  For example, in the modal
+ object below the create() method is simply declared as 'create(selector){...}'
+ instead of 'create:function(){...}'*/
   const modal = {
     create(selector) {
 
@@ -30,6 +36,12 @@
 
     }
   }
+
+
+/*ES6 allows for computed property names when declaring objects with object literal.
+You can actually compute the key right within the [] when declaring the object.
+In Wes's example below,the property name pocketColorOpposite is declared using a
+template string within the [].*/
 
   function invertColor(color) {
       return '#' + ("000000" + (0xFFFFFF ^ parseInt(color.substring(1),16)).toString(16)).slice(-6);
@@ -43,6 +55,11 @@
     [`${key}Opposite`]: invertColor(value)
   };
 
+
+/*This another example of using computed property names. Here, each key (and value)
+is declared by plucking off the name from the front of the keys array by
+using .shift() right witing the []. A similar operation is done for declaring the
+corresponding values.*/
   const keys = ['size', 'color', 'weight'];
   const values = ['medium', 'red', 100];
 
@@ -53,6 +70,24 @@
   }
   console.log(shirt);
 
+//My example:
+/*Using a computed property name to pluck the first item of the make array and then
+doing a similar operation to set the car model as the value. However, in this case
+the value is first run through the paint function which adds a color to the car.*/
+const make = ['Chevy', 'Dodge', 'Ford', 'Acura'];
+const model = ['Corvette', 'Challenger', 'Mustang', 'NSX'];
+const color = ['Black', 'Orange', 'Silver', 'Red'];
+
+function paint(car) {
+  return `${color.shift()} ${car}`;
+};
+
+const garage = {
+  [make.shift()]: paint(model.shift()),
+  [make.shift()]: paint(model.shift()),
+  [make.shift()]: paint(model.shift()),
+  [make.shift()]: paint(model.shift())
+};
 
 </script>
 </body>
