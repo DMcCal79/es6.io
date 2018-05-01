@@ -6,6 +6,14 @@
 </head>
 <body>
 <script>
+/*Chaining promises together allows you to take the result resolved from one Promise
+and then immediately pass it into another promise. You can chain as many promises
+together as you like.  In Wes's example below, hydrateAuthor takes the post returned
+from getPostById, finds the matching author in the authors array, and then returns the
+post with the author property changed to the matching author object that was found
+in authors.  The result is a post that has more detailed information about the
+author than just the name.*/
+
   const posts = [
     { title: 'I love JavaScript', author: 'Wes Bos', id: 1 },
     { title: 'CSS!', author: 'Chris Coyier', id: 2 },
@@ -59,6 +67,129 @@
     .catch(err => {
       console.error(err);
     });
+
+    //My Example:
+
+    const garage = [
+      { vehicleType: 'car', model:'Camaro', spot: 1 },
+      { vehicleType: 'car', model:'Challenger', spot: 2 },
+      { vehicleType: 'car', model:'NSX', spot: 3 }
+    ];
+
+    const model = [
+      { name: 'Camaro', color: 'black', engine: 'V8' },
+      { name: 'Challenger', color: 'orange', engine: 'V8' },
+      { name: 'NSX', color: 'silver', engine:'V6' }
+    ];
+
+    function locateCars(spot) {
+      return new Promise((resolve,reject) => {
+        setTimeout(()=> {
+          const car = garage.find(car => car.spot === spot);
+          if(car) {
+            resolve(car);
+          } else {
+            reject(Error('Can\'t find your ride.'));
+          }
+        },2000);
+      })
+    }
+
+    function carSpecs(car) {
+      return new Promise((resolve,reject) => {
+        const carDeets = model.find(model => model.name === car.model);
+        if(carDeets) {
+          car.model = carDeets;
+          resolve(car);
+        } else {
+          reject(Error('Can\'t find any info!'));
+        }
+      })
+    }
+
+    locateCars(3)
+    .then(car => {
+      return carSpecs(car)
+    })
+    .then(car => {
+      console.log(car);
+    })
+    .catch(err => {
+      console.error(err);
+    })
+
+    //Another Example:
+    const orders = [
+      {orderNum: 1, order: 'coffee'},
+      {orderNum: 2, order: 'latte'},
+      {orderNum: 3, order: 'mocha'},
+      {orderNum: 4, order: 'tea'}
+    ];
+
+    const details = [
+      {drink: 'coffee', temp: 'iced' , toppings:'none'},
+      {drink: 'latte', temp: 'hot', toppings: 'whipped cream'},
+      {drink: 'mocha', temp: 'hot', toppings: 'chocolate shavings'},
+      {drink: 'tea', temp: 'iced', toppings: 'none'}
+    ];
+
+    const extras = [
+      {orderNum: 1, sides: 'muffin'},
+      {orderNum: 2, sides: 'bagel'},
+      {orderNum: 3, sides: 'cookie'},
+      {orderNum: 4, sides: 'scone'}
+    ];
+
+    function makeOrder(orderNum) {
+      return new Promise((resolve,reject) => {
+        setTimeout(()=> {
+          const selection = orders.find(order => order.orderNum === orderNum);
+          if(selection) {
+            resolve(selection);
+          } else {
+            reject(Error('Can\'t locate order!'));
+          }
+        }, 2000);
+      })
+    }
+
+    function orderDetails(selection) {
+      return new Promise((resolve,reject) => {
+        const moreDetails = details.find(item => item.drink === selection.order);
+        if(moreDetails) {
+          selection.order = moreDetails;
+          resolve(selection);
+        } else {
+            reject(Error('Can\'t find order details!'));
+        }
+      })
+    }
+
+    function addOns(selection) {
+      return new Promise((resolve,reject) => {
+        const addOn = extras.find(treats => treats.orderNum === selection.orderNum);
+        if(addOn) {
+          selection.sides = addOn.sides;
+          resolve(selection);
+        } else {
+          reject((Error('Can\'t find any sides ordered!')))
+        }
+      })
+    }
+
+    makeOrder(2)
+    .then(selection => {
+      return orderDetails(selection)
+    })
+    .then(selection => {
+      return addOns(selection)
+    })
+    .then(selection => {
+      console.log(selection)
+    })
+    .catch(err => {
+      console.error(err)
+    })
 
 
 

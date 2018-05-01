@@ -6,28 +6,58 @@
 </head>
 <body>
 <script>
-  // const weather = new Promise((resolve) => {
-  //   setTimeout(() => {
-  //     resolve({ temp: 29, conditions: 'Sunny with Clouds'});
-  //   }, 2000);
-  // });
 
-  // const tweets = new Promise((resolve) => {
-  //   setTimeout(() => {
-  //     resolve(['I like cake', 'BBQ is good too!']);
-  //   }, 500);
-  // });
+/*Using Promise.all() allows you to combine several promises together that don't
+necessarily need to be run in any particular sequence. In other words, if you have
+a couple (or more) promises that don't rely on eachother to be performed, then
+Promise.all() will allow you to combine them all into one promise.
 
-  // Promise
-  //   .all([weather, tweets])
-  //   .then(responses => {
-  //     const [weatherInfo, tweetInfo] = responses;
-  //     console.log(weatherInfo, tweetInfo)
-  //   });
+When using Promise.all, you pass an array of the promises that you wish to perform
+as a parameter like so:
+
+Promise.all([promiseOne,promiseTwo,promiseThree])
+
+The result that you get back is an array of results that corresponds to the Promises
+that were originally passed in.  Promise.all() will not resolve untill all of the Promises
+passed in have been resolved.  In Wes's example below, Promise.all() will not resolve
+until weather has resolved eventhough tweets will resolve almost right away.
+
+Also, Promise.all() will reject if ANY of the promises reject. So either it's all
+or nothing.*/
+
+  const weather = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ temp: 29, conditions: 'Sunny with Clouds'});
+    }, 2000);
+  });
+
+  const tweets = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(['I like cake', 'BBQ is good too!']);
+    }, 500);
+  });
+
+  Promise
+    .all([weather, tweets])
+    .then(responses => {
+      const [weatherInfo, tweetInfo] = responses;
+      console.log(weatherInfo, tweetInfo)
+    });
+//Same result, slightly different syntax.
+  Promise.all([weather,tweets])
+    .then(responses => {
+      const [ currentWeather, myTweets ] = responses;
+      console.log(currentWeather);
+      console.log(myTweets);
+    })
+
 
   const postsPromise = fetch('http://wesbos.com/wp-json/wp/v2/posts');
   const streetCarsPromise = fetch('http://data.ratp.fr/api/datasets/1.0/search/?q=paris');
 
+/*In this example, Wes makes two fetch requests using Promise.all(). Both results
+need to be converted to JSON so another Promise.all() is made and returns both results
+in JSON format by using .map & .json(). */
   Promise
     .all([postsPromise, streetCarsPromise])
     .then(responses => {
@@ -36,6 +66,71 @@
     .then(responses => {
       console.log(responses);
     });
+
+//My example:
+
+function wings() {
+  return new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve(['buffalo','honeyBBQ','ranch','cajun']);
+      reject(err => err);
+    }, 300)
+  })
+}
+
+function pizza() {
+  return new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve({size: 'XL', crust: 'thin', toppings: ['pep','ham']});
+      reject(err => err);
+    }, 4000);
+  })
+}
+
+function coffee() {
+  return new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve('I will take a large cold brew please.');
+      reject(err => err);
+    }, 2000)
+  })
+}
+
+Promise.all([wings(),pizza(),coffee()])
+.then(response => {
+  const [ appetizer, mainCourse, java ] = response;
+  console.log(appetizer,mainCourse,java);
+})
+.catch(err => {
+  console.log(err);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>

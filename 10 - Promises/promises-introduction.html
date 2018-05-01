@@ -6,11 +6,26 @@
 </head>
 <body>
 <script>
+
+/*Using fetch to make ajax requests will immediately return a promise. When JS
+returns a promise, it's letting you know about something the will occur
+ in the future.  Its saying "I will get to work on that now and get back to you." */
+
 const postsPromise = fetch('http://wesbos.com/wp-json/wp/v2/posts');
 
 postsPromise
+/*If the fetch is successful, it will run the callback function after the
+first .then handler. It will continue to run the subsequent .then(function)'s unless
+an error gets thrown.
+
+When the data is initialy returned from the fetch, it's not returned in any
+specific type. In this example from Wes, we are wanting the data returned as
+JSON so the .json() method is used.*/
   .then(data => data.json())
   .then(data => { console.log(data) })
+/*If the fetch is unsuccessful, then the .catch handler will grab the error and fire
+the callback function after .catch.  The .catch handler will also catch any
+.then(function) that throws an error.*/
   .catch((err) => {
     console.error(err);
   })
