@@ -6,6 +6,18 @@
 </head>
 <body>
 <script>
+
+/*Symbol is the 7th and newest JS primitive data type.  It's main purpose is to make
+object properties that contain sensitive info private. The syntax is Symbol([description])
+where description is simply a string that is used for reference and debugging and isn't
+actually used to access the symbol. Symbols are also enumerable and won't show up when
+running the for(in..) loop. */
+
+/*In the example below, both wes and person contain different values eventhough they
+both have 'Wes' as the descriptor. Running wes === person will return false. The
+true "value" of a Symbol is something like a bunch of random letters and numbers
+that are unique to symbol*/
+
   const wes = Symbol('Wes');
   const person = Symbol('Wes');
 
@@ -19,9 +31,41 @@
     console.log(person);
   }
 
+  /*In the example below, Wes shows a work-around for displaying properties of an
+  object that are Symbols.  Since the for(in..) loop will not work, you have to use
+  Object.getOwnPropertySymbols() and pass in the object that you wish to iterate
+  over. You can then map over the results to pull the values.*/
+
   const syms = Object.getOwnPropertySymbols(classRoom);
   const data = syms.map(sym => classRoom[sym]);
   console.log(data);
+
+  //My example:
+
+  const hotelGuests = {
+    [Symbol('Jones')]: {nights: 2, reservation: 'internet', payment: 'CC'},
+    [Symbol('Garcia')]: {nights: 2, reservation: 'internet', payment: 'CC'},
+    [Symbol('Smith')]: {nights: 2, reservation: 'app', payment: 'EFT'},
+    [Symbol('Smith')]: {nights: 3, reservation: 'internet', payment: 'CC'}
+  };
+
+  const customers = Object.getOwnPropertySymbols(hotelGuests);
+  const payMethods = customers.map(customer => hotelGuests[customer]['payment']);
+
+  console.log(payMethods);
+
+  /*Using Symbol.for(key) allows you to create a symbol in the global registry
+  list.  Using the traditional Symbol() will not create the symbol in the global
+  registry*/
+
+  //Create Symbol that can be accessed globally:
+  const MLB = Symbol.for('baseball');
+
+  //Retrieve the key name for the global symbol MLB:
+  console.log(Symbol.keyFor(MLB));
+
+
+
 
 </script>
 </body>
