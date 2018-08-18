@@ -16,6 +16,11 @@
   </div>
   <div class='baseball'>
   </div>
+  <div class="cars">
+  </div>
+  <div class='facts'>
+  </div>
+
 
 <script>
   const dict = {
@@ -76,7 +81,63 @@
   sports.appendChild(p2);
 
 
+//Another Example
 
+const cars = {
+  Vette: 'Chevrolet Corvette',
+  Stang: 'Ford Mustang',
+  Goat: 'Pontiac GTO'
+};
+
+function garage(strings,...values) {
+  const carNames = values.map(value => {
+    if (cars[value]) {
+      return `<abbr title="${cars[value]}">${value}</abbr>`;
+    }
+    return `${value}`;
+  })
+  return strings.reduce((sentence,string,i) => {
+    return `${sentence}${string}${carNames[i] || ''}`
+  },'')
+}
+
+const dreamCars = garage `In my dream garage, the first spot goes to a ${'Vette'}.
+The next spot goes to a ${'Stang'}.  Finally, the third spot goes
+to a ${'Goat'}.`;
+
+const parkedCars = document.querySelector('.cars');
+const p3 = document.createElement('p');
+p3.innerHTML = dreamCars;
+parkedCars.appendChild(p3);
+
+//How about another one..
+
+funFacts = {
+  TX: 'no state income tax',
+  OH: 'home of Donatos Pizza',
+  WA: 'beautiful scenery'
+};
+
+function stateInfo(strings,...values) {
+  const factCheck = values.map(value => {
+    if(funFacts[value]) {
+      return `<abbr title="${funFacts[value]}">${value}</abbr>`;
+    }
+    return `${value}`;
+  })
+  return strings.reduce((sentence,string,i) => {
+    return `${sentence}${string}${factCheck[i] || ''}`;
+  },'');
+}
+
+const nuggets = stateInfo `Did you know that ${'TX'} is a great place to work? Also,
+${'OH'} has some incredible pizza. If you need to cool off, go check out ${'WA'}.
+I have heard that ${'TN'} has some great BBQ ribs.`;
+
+const facts = document.querySelector('.facts');
+const p4 = document.createElement('p');
+p4.innerHTML = nuggets;
+facts.appendChild(p4);
 
 </script>
 </body>

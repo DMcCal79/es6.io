@@ -106,30 +106,40 @@ Promise.all([wings(),pizza(),coffee()])
 })
 
 
+//And yet, another example:
 
+const cookies = new Promise((resolve,reject) => {
+  setTimeout(() => {
+  resolve(['M&M', 'chocolate chip', 'peanut butter', 'oatmeal']);
+  reject(Error('Oops!'));
+  },2000);
+});
 
+const chips = new Promise((resolve,reject) => {
+  setTimeout(() => {
+  resolve(['bbq', 'sour cream & onion', 'salt & vinegar','tortilla']);
+  reject(Error('Oops!'));
+  },1000);
+});
 
+const steaks = new Promise((resolve,reject) => {
+  setTimeout(() => {
+  resolve(['T-bone', 'porterhouse', 'ribeye', 'strip', 'filet']);
+  reject(Error('Oops!'));
+},3000);
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Promise
+  .all([cookies,chips,steaks])
+  .then(data => {
+    const [ tiffsTreats, snacks, beef ] = data;
+    console.log(tiffsTreats);
+    console.log(snacks);
+    console.log(beef)
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 
 </script>

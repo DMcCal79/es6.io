@@ -6,21 +6,80 @@
 </head>
 <body>
 <script>
-  function Dog(name, breed) {
+
+class Dog {
+  constructor(name, breed) {
     this.name = name;
     this.breed = breed;
   }
-
-  Dog.prototype.bark = function() {
-    console.log(`Bark Bark! My name is ${this.name}`);
-  };
-
-  Dog.prototype.cuddle = function() {
+  /*Important, DO NOT use commas after each method, it will break if you do.*/
+  bark() {
+    console.log(`Bark Bark! My name is ${this.name}.`);
+  }
+  cuddle() {
     console.log(`I love you owner!`);
-  };
+  }
+/*A static method lives on the class and does not get inherited by
+by the instances of the class.  For example, calling snickers.info() wouldn't
+do anything.  However, Dog.info() would console log the message.*/
+  static info() {
+    console.log('A dog is ten times better than a cat.');
+  }
+
+  get description() {
+    return `${this.name} is a ${this.breed} type of dog.`;
+  }
+
+  set nicknames(value) {
+    this.nick = value.trim();
+  }
+
+  get nicknames() {
+    return this.nick.toUpperCase();
+  }
+}
+
 
   const snickers = new Dog('Snickers', 'King Charles');
   const sunny = new Dog('Sunny', 'Golden Doodle');
+
+
+//My Example:
+
+class Pizza {
+  /*Contructor for each instance of Pizza.*/
+  constructor(size, crust, topping) {
+    this.size = size;
+    this.crust = crust;
+    this.topping = topping;
+  }
+
+  confirmSelections() {
+    console.log(`You have ordered a ${this.size} ${this.topping} pizza on ${this.crust} crust.`)
+  }
+
+ /*Only works with Pizza.opinion(), will not be inherited by other instances of Pizza.*/
+  static opinion() {
+    console.log('Pizza is the best food in the world');
+  }
+
+ /*Sets the status of the order and shows a pop-up that alerts that the order order
+ status has changed.*/
+  set order(status) {
+    this.orderStatus = status;
+    alert('Order status has been updated.');
+  }
+
+ /*Displays the value of the orderStatus property the was established with the order
+ setter.*/
+  get order() {
+    return this.orderStatus;
+  }
+}
+
+const roni = new Pizza('large','thin','pepperoni');
+const bacon = new Pizza('medium', 'deep dish', 'bacon');
+
 
 </script>
 </body>

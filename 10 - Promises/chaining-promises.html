@@ -82,6 +82,7 @@ author than just the name.*/
       { name: 'NSX', color: 'silver', engine:'V6' }
     ];
 
+    //Checks the garage and returns the car in the spot indicated
     function locateCars(spot) {
       return new Promise((resolve,reject) => {
         setTimeout(()=> {
@@ -95,6 +96,8 @@ author than just the name.*/
       })
     }
 
+    /*Returns more details on the car based on the car name and adds the detail
+     properties to the car*/
     function carSpecs(car) {
       return new Promise((resolve,reject) => {
         const carDeets = model.find(model => model.name === car.model);
@@ -140,6 +143,7 @@ author than just the name.*/
       {orderNum: 4, sides: 'scone'}
     ];
 
+    //Returns the beverage order based on the order number entered.
     function makeOrder(orderNum) {
       return new Promise((resolve,reject) => {
         setTimeout(()=> {
@@ -153,6 +157,8 @@ author than just the name.*/
       })
     }
 
+    /*Looks up the beverage details by name of the beverage ordered. Then adds
+    the detail properties to the order.*/
     function orderDetails(selection) {
       return new Promise((resolve,reject) => {
         const moreDetails = details.find(item => item.drink === selection.order);
@@ -164,7 +170,8 @@ author than just the name.*/
         }
       })
     }
-
+    /*Looks up the side dishes based on the beverage order number and adds the
+    side as a property to the drink order.*/
     function addOns(selection) {
       return new Promise((resolve,reject) => {
         const addOn = extras.find(treats => treats.orderNum === selection.orderNum);
@@ -191,6 +198,62 @@ author than just the name.*/
       console.error(err)
     })
 
+
+//And yet, another example:
+
+const pizzas = [
+  { size: 'small', crust: 'thin', topping: 'pepperoni', order: 1 },
+  { size: 'medium', crust: 'thick', topping: 'italian sausage', order: 2 },
+  { size: 'large', crust:'hand-tossed', topping: 'bacon', order: 3 },
+  { size: 'XL', crust: 'wheat', topping: 'ham', order: 4 }
+];
+
+const appetizers = [
+  { order: 1, side: 'breadsticks' },
+  { order: 2, side: 'wings' },
+  { order: 3, side: 'garlic bread' },
+  { order: 4, side: 'salad'}
+];
+
+//Returns the pizza ordered based on the size entered.
+function pizzaOrder(size) {
+  return new Promise((resolve,reject) => {
+    setTimeout(()=> {
+    const pizza = pizzas.find(pizza => pizza.size === size);
+    if(pizza) {
+      resolve(pizza);
+    }
+    else {
+      reject(Error(`Not able to locate the ${size} pizza that you ordered.`));
+    }
+  },3000);
+});
+};
+
+/*Looks up the appetizer to include with the pizza based on the order number and
+then adds the appetizer as a property to the order.*/
+function getSides(pizza) {
+  return new Promise((resolve,reject) => {
+    const sideDish = appetizers.find(appetizer => appetizer.order === pizza.order);
+    if(sideDish) {
+      pizza.appetizer = sideDish.side;
+      resolve(pizza);
+    } else {
+      reject(Error(`Looks like we forgot the appetizer for your ${pizza.size} pizza.`));
+    }
+  });
+};
+
+pizzaOrder('large')
+  .then(pizza => {
+    return getSides(pizza);
+  })
+  .then(pizza => {
+    console.log(pizza);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 
 </script>

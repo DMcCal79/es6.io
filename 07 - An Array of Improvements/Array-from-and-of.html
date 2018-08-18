@@ -18,9 +18,7 @@ Array.from(people) will convert const people from a node list to a true array.*/
   const people = document.querySelectorAll('.people p');
 /*Array.from allows you to to pass a map function as a second argument so that you
 can go ahead and run the map function without having to first store the newly
-created array in a separate variable first.  In other words, you wouldn't need
-to create const names = people.map(person => person.textContent).  You could
-instead run the code below and accomplish both at once:*/
+created array in a separate variable first.*/  
   const peopleArray = Array.from(people, person => {
     return person.textContent;
   });

@@ -6,6 +6,9 @@
 </head>
 <body>
 <script>
+
+/*Constructor function for dog.  Always good idea to capitalize the name of the
+constructor.*/
   function Dog(name, breed) {
     this.name = name;
     this.breed = breed;
@@ -14,16 +17,60 @@
     console.log(`Bark Bark! My name is ${this.name}`)
   }
 
+/*Creating new instances of a Dog using new in front of the constructor.*/
   const snickers = new Dog('Snickers', 'King Charles');
   const sunny = new Dog('Sunny', 'Golden Doodle');
 
+/*Here Wes is adding a new method to the Dog prototype called bark. This method will
+now be available to all instances of Dog through prototypal inheritance.*/
   Dog.prototype.bark = function() {
     console.log(`Bark Bark🇨🇦🇨🇦🇨🇦! My name is ${this.name} and I'm a ${this.breed}`);
   }
 
+/*Another example of a method being added to the Dog prototype that will be inherited
+by all instances of dog.  The instances snickers and sunny now have access to the
+bark and cuddle methods from the Dog protoype.*/
   Dog.prototype.cuddle = function() {
     console.log(`I love you owner!`);
   }
+
+//My Example:
+/*Constructor function that creates Transformers.*/
+function Transformer(name, faction, altMode) {
+  this.name = name;
+  this.faction = faction;
+  this.altMode = altMode;
+};
+
+/*The instances of optimus and megatron are created.*/
+const optimus = new Transformer('Optimus Prime', 'Autobot', 'Truck');
+const megatron = new Transformer('Megatron', 'Decepticon', 'Cannon');
+
+/*Adding a method to the prototype to be inherited by all instances of
+Transformers.*/
+Transformer.prototype.identify = function() {
+  console.log(`My name is ${this.name}, leader of the ${this.faction}s.`);
+};
+
+/*Added another method to the Transformer prototype to be inherited by all
+instances of Transformers.*/
+Transformer.prototype.transform = function() {
+  console.log(`I can turn into a ${this.altMode}.`);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>

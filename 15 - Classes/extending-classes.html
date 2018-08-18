@@ -12,28 +12,165 @@
       this.thirst = 100;
       this.belly = [];
     }
+
     drink() {
       this.thirst -= 10;
       return this.thirst;
     }
+
     eat(food) {
       this.belly.push(food);
       return this.belly;
     }
+
+    speak() {
+      console.log(`My name is ${this.name}.`);
+    }
   }
 
+/*Using extends creates a child class of Dog from the parent class of Animal.*/
   class Dog extends Animal {
     constructor(name, breed) {
+      /*Super calls the parent class constructor which is Animal. Super must be
+      used before the this keyword is used anywhere.  In other words, an Animal must
+      be created before it can be customized into a Dog.  */
       super(name);
       this.breed = breed;
     }
+
     bark() {
-      console.log('Bark bark I\'m a dog');
+      console.log('Bark bark bark bark! I\'m a dog.');
     }
   }
 
+  const angus = new Dog('Angus', 'Springer Spaniel');
   const rhino = new Animal('Rhiney');
-  const snickers = new Dog('Snickers', 'King Charles');
+
+
+//My example:
+
+class Vehicle {
+  constructor(wheels, fuelType) {
+    this.wheels = wheels;
+    this.fuelType = fuelType
+  }
+
+  fuel() {
+    console.log(`This vehicle runs on ${this.fuelType}`);
+  }
+}
+
+const myRide = new Vehicle(4,'regular unleaded');
+
+class Sportscar extends Vehicle {
+  constructor(wheels, fuelType, make, model) {
+    super(wheels, fuelType);
+    this.make = make;
+    this.model = model;
+  }
+
+  brag() {
+    console.log(`I am proud of my ${this.make} ${this.model}!`);
+  }
+}
+
+const fast = new Sportscar(4, 'Premium Unleaded', 'Chevy', 'Camaro');
+
+//Another example:
+
+class BaseballTeam {
+  constructor(players, gamesRemaining, positions) {
+    this.players = players;
+    this.gamesRemaining = gamesRemaining;
+    this.positions = positions
+  }
+
+  season() {
+    console.log(`This year we will play ${this.gamesRemaining} games.`)
+  }
+
+  gameOver() {
+    this.gamesRemaining -= 1;
+    return this.gamesRemaining;
+  }
+}
+
+const myTeam = new BaseballTeam(25, 162, 9);
+
+class Tribe extends BaseballTeam {
+  constructor(players, gamesRemaining, positions, city, name) {
+    super(players, gamesRemaining, positions);
+    this.city = city;
+    this.name = name;
+  }
+
+  weAre() {
+    console.log(`We are the ${this.city} ${this.name}`);
+  }
+
+/*Using super to call the gameOver function from the parent object BaseballTeam*/
+  gameOver() {
+    super.gameOver();
+    console.log(`There are ${this.gamesRemaining} games remaining and the season is now ${((162-this.gamesRemaining)*100 / 162).toFixed(1)} percent complete!`);
+  }
+}
+
+const Indians = new Tribe(25,162,9,'Cleveland','Indians');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>

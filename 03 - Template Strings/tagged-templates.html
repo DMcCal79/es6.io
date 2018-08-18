@@ -13,6 +13,7 @@
   <div class="wesExample"></div>
   <div class="myExample"></div>
   <div class="otherExample"></div>
+  <div class="dinner"></div>
 
 <script>
   /*With tagging, I can run the string through the highlight function before
@@ -77,6 +78,26 @@
 
   const otherExample = document.querySelector('.otherExample');
   otherExample.innerHTML = baseball;
+
+  //Yet, another example...
+  function myPie (strings, ...values) {
+    var str = '';
+    strings.forEach((string,i) => {
+      str += `${string}<span class="hl">${values[i] || ''}</span>`;
+    });
+    return str;
+  };
+
+  const size = 'XL';
+  const crust = 'thin';
+  const topping = 'pepperoni';
+  const side = 'wings';
+
+  const pieOrder = myPie `I would like to order a ${size} ${topping} pizza on ${crust}
+  crust with a side of ${side} please.`;
+
+  const pizza = document.querySelector('.dinner');
+  pizza.innerHTML = pieOrder;
 
 
 

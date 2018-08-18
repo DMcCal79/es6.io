@@ -5,8 +5,23 @@
   },
   "extends": "airbnb",
   "rules": {
-    "no-console": 0,
-    "no-unused-vars": 1
+    "no-console": "off",
+    "linebreak-style": "off",
+    "arrow-parens": ["error", "as-needed"]
   },
   "plugins": ["html", "markdown"]
 }
+
+
+# {
+#   "env": {
+#     "es6": true,
+#     "browser": true
+#   },
+#   "extends": "airbnb",
+#   "rules": {
+#     "no-console": 0,
+#     "no-unused-vars": 1
+#   },
+#   "plugins": ["html", "markdown"]
+# }

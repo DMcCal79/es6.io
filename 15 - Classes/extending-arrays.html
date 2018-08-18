@@ -6,18 +6,27 @@
 </head>
 <body>
 <script>
-  class MovieCollection extends Array {
-    constructor(name, ...items) {
-      super(...items);
+/*You can also extend the built-in objects.  Here, the class of MovieCollection
+extends the built-in Array object. In this example, the first argument is a name property
+to be added to the new array.  Arrays can also have properties as they are
+a form of an object.  The second arguments is a rest parameter that will bundle
+up any arguments after name into an array.*/
+class MovieCollection extends Array {
+  constructor(name, ...items) {
+    super(...items);
       this.name = name;
-    }
-    add(movie) {
-      this.push(movie);
-    }
-    topRated(limit = 10) {
-      return this.sort((a, b) => (a.stars > b.stars ? -1 : 1)).slice(0, limit);
-    }
   }
+
+  add(movie) {
+    this.push(movie);
+  }
+
+/*This will sort the movies by their star rating. The limit of 10 is set as
+a default argument and allows a maximum of 10 movies to be sorted.*/
+  topRated(limit = 10) {
+    return this.sort((a,b) => (a.stars > b.stars ? -1 : 1)).slice(0, limit);
+  }
+}
 
   const movies = new MovieCollection('Wes\'s Fav Movies',
     { name: 'Bee Movie', stars: 10 },
@@ -26,7 +35,91 @@
     { name: 'King of the Road', stars: 8 }
   );
 
-  movies.add({ name: 'Titanic', stars: 5 });
+
+
+//My example
+class Dinner extends Array {
+  constructor(wingType, ...wings) {
+    super(...wings);
+    this.wingType = wingType;
+  }
+
+  addToOrder(item) {
+    this.push(item);
+  }
+
+  hotWings(limit = 8) {
+    return this.sort((a,b) => a.heatRating > b.heatRating ? -1 : 1).slice(0, limit);
+  }
+}
+
+
+const letsEat = new Dinner('boneless',
+{sauce: 'Buffalo Mild' , heatRating: 3},
+{sauce: 'Buffalo Medium', heatRating: 4},
+{sauce: 'Atomic' , heatRating: 5},
+{sauce: 'Honey Mustard', heatRating: 2},
+{sauce: 'Teriyaki', heatRating: 1}
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>
