@@ -6,6 +6,11 @@
 </head>
 <body>
 <script>
+
+/*Instead of having to write achy.next() several times to manaully proceed
+through the lyrics generator, you can use a for of loop to interate through each
+yield.*/
+
   function* lyrics() {
     yield `But don't tell my heart`;
     yield `My achy breaky heart`;
@@ -14,12 +19,29 @@
     yield `My achy breaky heart`;
     yield `He might blow up and kill this man`;
   }
-
   const achy = lyrics();
 
   for (const line of achy) {
-    console.log(line);
+    console.log(line)
+  };
+
+  //My Example:
+
+  function* pizzaPlaces() {
+    yield 'Tony C';
+    yield 'Home Slice';
+    yield 'Double Daves';
+    yield 'Local Slice';
+    yield 'Conans';
+    yield 'Nikis';
   }
+
+  const pieTime = pizzaPlaces();
+
+for (const pie of pieTime) {
+  console.log(pie)
+}
+
 </script>
 </body>
 </html>

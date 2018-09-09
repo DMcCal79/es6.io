@@ -7,9 +7,23 @@
 <body>
 <script>
 
+/*In this example, Wes demonstrates how generators can be used to make ajax requests
+that all need to fire in a certain order.  A possible use case would be retrieving a
+specific post from a user account.  The first ajax request would find the user account.
+The next ajax request would retrieve the posts from the user account that was retrieved in
+the previous ajax request.  The next ajax request would then retrieve a specific post from
+the list of posts retrieved in the previous ajax request.*/
+
+
+/*In this function, the data is retrieved, then converted to json, then stored in a
+variable by passing the data to dataGen.next() call.  For example, in the first yield
+the data is converted to json and then stored in the const beers.  In reality, the urls
+in this example don't really depend on eachother.  However, if they did then data in
+const beers would then be passed in the url for the url for the next yield.*/
+
   function ajax(url) {
-    fetch(url).then(data => data.json()).then(data => dataGen.next(data))
-  }
+    fetch(url).then(data => data.json()).then(data =>dataGen.next(data));
+  };
 
   function* steps() {
     console.log('fetching beers');
@@ -27,6 +41,29 @@
 
   const dataGen = steps();
   dataGen.next(); // kick it off
+
+  //My Example:
+
+ function ajaxTwo(url) {
+   fetch(url)
+   .then(data => data.json())
+   .then(data => jobSearch.next(data))
+   .catch(error => console.log(error))
+ };
+
+ function* research() {
+   //The profile yield retrieves my github account.
+   const profile = yield ajaxTwo('https://api.github.com/users/DMcCal79');
+   console.log(profile)
+   /*The localJobs yield takes the location from my profile that was retrieved in the
+   previous ajax request and searches by my location city on the github jobs board for
+   JavaScript positions.*/
+   const localJobs = yield ajaxTwo(`https://jobs.github.com/positions.json?description=javascript&location=${profile.location.split(',')[0]}`);
+   console.log(localJobs);
+ }
+
+const jobSearch = research();
+jobSearch.next();
 
 </script>
 </body>

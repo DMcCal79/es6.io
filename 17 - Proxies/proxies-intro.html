@@ -6,20 +6,89 @@
 </head>
 <body>
 <script>
+
+
+/*A proxy is an object that is used to establish/customize the basic object functions
+of the target object(i.e. get,set,etc.)  In Wes's example (commented out), the personProxy
+is a proxy for the object person. He has defined some custom logic for both the get and set
+functions. For example, when somebody makes a get request to person.name, the value is
+returned in all-caps.  And when somebody sets a value that is a string, it is set in all-caps
+and also has any whitespace removed. */
+
+
+// const person = { name: 'Wes', age: 100 };
+// const personProxy = new Proxy(person, {
+//   get(target, name) {
+//     // console.log('someone is asking for ', target, name);
+//     return target[name].toUpperCase();
+//   },
+//   set(target, name, value) {
+//     if(typeof value === 'string') {
+//       target[name] = value.trim().toUpperCase() + '✂️';
+//     }
+//   }
+// });
+//
+// personProxy.name = 'Wesley';
+
+
+
+//My modified version of Wes's example:
+
   const person = { name: 'Wes', age: 100 };
   const personProxy = new Proxy(person, {
-    get(target, name) {
-      // console.log('someone is asking for ', target, name);
-      return target[name].toUpperCase();
-    },
-    set(target, name, value) {
-      if(typeof value === 'string') {
-        target[name] = value.trim().toUpperCase() + '✂️';
+    get(target, prop) {
+      if(prop === 'name') {
+        return `The name is ${target.name.toUpperCase()}.`;
       }
-    }
-  });
+      else {
+        return target[prop];
+      }
+    },
+    set(target,prop,value) {
+      // sets string values with '-' between each letter
+      if(typeof value === 'string') {
+        target[prop] = Array.from(value)
+        .join('-');
+      }
+      else {
+        target[prop] = value;
+      }
+    }});
 
-  personProxy.name = 'Wesley';
+//My example:
+
+const pizza = {
+  crust: 'thin',
+  size: 'large',
+  topping: 'pepperoni'
+};
+
+const pizzaProxy = new Proxy(pizza, {
+  get(target, prop) {
+    if(prop === 'crust') {
+      /*If the get request is for the crust property, then value is returned backwards
+      with an '_' between eachletter.*/
+      return Array.from(target.crust)
+                  .reverse()
+                  .join('_');
+    } else {
+      return target[prop];
+    }
+  },
+  set(target, prop, value) {
+    //If value is a string, it is set in all caps
+    if(typeof value === 'string') {
+      target[prop] = value.toUpperCase();
+    } else {
+      target[prop] = value;
+    }
+  }
+});
+
+pizzaProxy.crust = 'thick';
+pizzaProxy.vegetables = 'green peppers';
+    personProxy.name = 'Wesley';
 </script>
 </body>
 </html>

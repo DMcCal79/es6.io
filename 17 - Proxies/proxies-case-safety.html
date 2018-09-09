@@ -6,20 +6,88 @@
 </head>
 <body>
 <script>
-  const safeHandler = {
-    set(target, name, value) {
-      const likeKey = Object.keys(target).find(k => k.toLowerCase() === name.toLowerCase());
 
-      if (!(name in target) && likeKey) {
-        throw new Error(`Oops! Looks like like we already have a(n) ${name} property but with the case of ${likeKey}.`);
+/*In Wes's example below, a proxy is used for the setter to detect whether the new
+property that is being set resembles a property that already exists on the object.
+For example, if I were to try to add a property named 'ID', then and error would be
+thrown that alerts me that it closely resembles the property 'id' which already
+exists on the object.*/
+  const safeHandler = {
+    set(target, prop, value) {
+      const likeKey = Object.keys(target).find(k => {
+        return k.toLowerCase() === prop.toLowerCase();
+      });
+      if(!(prop in target) && likeKey) {
+        throw new Error(`Sorry, it looks like ${prop} closely resembles the ${likeKey} property.
+          Please choose a different property name.`);
+      } else {
+        target[prop] = value;
       }
-      target[name] = value;
     }
   };
 
-  const safety = new Proxy({ id: 100 }, safeHandler);
+  const safety = new Proxy({id: 100}, safeHandler);
 
-  safety.ID = 200;
+//My Example:
+
+const taco = {
+              shell: 'soft',
+              meat: 'steak'
+            };
+const lunchOrder = {
+  set(target,prop,value){
+  const propCheck = Object.keys(target).find(key => {
+    return key.toLowerCase() === prop.toLowerCase();
+  });
+  if(!(prop in taco) && propCheck)   {
+    throw new Error(`Oops!! It appears the ${prop} closely resembles the ${propCheck} property.`)
+  } else {
+    target[prop] = value;
+  }
+}
+};
+const tacoProxy  = new Proxy(taco, lunchOrder);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const safeHandler = {
+  //   set(target, name, value) {
+  //     const likeKey = Object.keys(target).find(k => k.toLowerCase() === name.toLowerCase());
+  //
+  //     if (!(name in target) && likeKey) {
+  //       throw new Error(`Oops! Looks like like we already have a(n) ${name} property but with the case of ${likeKey}.`);
+  //     }
+  //     target[name] = value;
+  //   }
+  // };
+  //
+  // const safety = new Proxy({ id: 100 }, safeHandler);
+  //
+  // safety.ID = 200;
 
 </script>
 </body>

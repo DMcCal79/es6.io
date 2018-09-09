@@ -6,16 +6,36 @@
 </head>
 <body>
 <script>
+
+/* A normal function runs top to bottom until all lines of the function have been
+executed. However, generators are functions that you can pause and resume.  Generators
+will always have an * at the end of the word function. The yield keyword behaves similar
+to return only without stopping the function for running. Each yield statement is executed by
+using the .next() method on the instance of the generator.  In this example, this would be done
+by calling people.next().*/
+
   function* listPeople() {
+    yield 'Batman';
+    yield 'Superman';
+    yield 'Flash';
+  }
+
+/*Each call of people.next() will return an object with the properties value and done.  The
+done property will remain false until the last statement of the generator has been ran. You
+can return just the value only by calling people.next().value.*/
+
+  const people = listPeople();
+
+  function* keepTrack() {
     let i = 0;
     yield i;
     i++;
     yield i;
     i++;
     yield i;
-  }
+  };
 
-  const people = listPeople();
+  const countInt = keepTrack();
 
   const inventors = [
     { first: 'Albert', last: 'Einstein', year: 1879 },
@@ -27,14 +47,105 @@
     { first: 'Max', last: 'Planck', year: 1858 },
   ];
 
-  function* loop(arr) {
-    console.log(inventors);
-    for (const item of arr) {
-      yield item;
-    }
-  }
+/*In this example, the generator loopy takes in an array as an argument and then
+iterates over each item with a for of loop.  Each iteration takes place when the .next()
+method is called.*/
 
-  const inventorGen = loop(inventors);
+function* loopy(arr) {
+  for(const inventor of arr) {
+    yield inventor;
+  }
+};
+
+const loopInvent = loopy(inventors);
+
+//My Example:
+
+function* lineup(roster) {
+  for(const player of roster) {
+    yield player;
+  };
+}
+
+const tribe = [
+  {name: 'Lindor', position: 'SS' },
+  {name: 'Ramirez', position: '3B' },
+  {name: 'Brantley', position: 'LF' },
+  {name: 'Alonso', position: '1B' },
+  {name: 'Encarnacion', position: 'DH' },
+  {name: 'Gomes', position: 'C' },
+  {name: 'Kipnis', position: '2B' },
+  {name: 'Allen', position: 'CF' },
+  {name: 'Cabrera', position: 'RF' }
+];
+
+const starters = lineup(tribe);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>
