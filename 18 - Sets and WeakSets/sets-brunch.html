@@ -6,20 +6,55 @@
 </head>
 <body>
 <script>
+
+/*Wes's example below uses a restaurant scenerio to demonstrate how sets can be
+useful.  As customers are arriving to the restaurant for brunch, they are added to
+the waiting list (the set titled 'brunch') using brunch.add('name').  Once the
+restaurant opens, the order to seat the customers is then established by creating an
+iterator(titled 'line') and then seating each customer by using line.next().value.  Each
+time a customer is seated, the are removed from the iterator.  However, the original
+set (bruch) remains unchanged. As new customers arrive, they can be added to the
+waiting list (brunch) and later seated by calling line.next().value*/
+
   const brunch = new Set();
-  // as people start coming in
-  brunch.add('wes');
+  // as customers are arrving
+  brunch.add('Wes');
   brunch.add('Sarah');
   brunch.add('Simone');
-  // ready to open!
+  // restaurant is ready to open
   const line = brunch.values();
   console.log(line.next().value);
   console.log(line.next().value);
+  // new customers arrive
   brunch.add('Heather');
   brunch.add('Snickers');
+  // customers are continued to be seated
   console.log(line.next().value);
   console.log(line.next().value);
   console.log(line.next().value);
+
+//My Example:
+
+  const phoneQue = new Set();
+  // customer calls in and is placed on hold
+  phoneQue.add('Dwight');
+  phoneQue.add('Jim');
+  phoneQue.add('Michael');
+  phoneQue.add('Stanley');
+  /*customer service agents become available to take some of the calls on hold
+  in the order that they are received*/
+  const phoneAns = phoneQue.values();
+  console.log(phoneAns.next().value);
+  console.log(phoneAns.next().value);
+  // some more calls come through the que and are placed on hold
+  phoneQue.add('Angela');
+  phoneQue.add('Andy');
+  /*calls are continued to be answered in the order that they are received as
+  customer service agents become available*/
+  console.log(phoneAns.next().value);
+  console.log(phoneAns.next().value);
+  console.log(phoneAns.next().value);
+
 
 </script>
 </body>

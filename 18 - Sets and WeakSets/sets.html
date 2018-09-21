@@ -6,19 +6,57 @@
 </head>
 <body>
 <script>
+
+/* A set is similar to an array in that it allows you to store unique values of
+any type.  However, each value can only be stored once and can't be accessed via
+index as sets are not index based. Some of the most common methods on the set API
+that I could use in Wes's people set:
+
+people.add('Frank') - adds value 'Frank' to the set
+people.delete('Wes') - removes the value 'Wes' from the set
+people.clear() - removes all values from the set
+people.has('Snickers') - checks to see if the set contains the value 'Snickers'(returns boolean)
+*/
   const people = new Set();
   people.add('Wes');
   people.add('Snickers');
   people.add('Kait');
 
-  for (const person of  people) {
-    console.log(person);
-  }
+/*people.values() returns an iterator object that can be accessed using the.next()
+method similar to a generator.  Each value can be iterated over one by one using .next()
+as they would be using a generator.*/
+  const folks = people.values();
+  console.log(folks.next());
+  console.log(folks.next());
 
+/*The values in a set can also be iterated over using a for of loop.*/
+  for(const person of people) {
+    console.log(person);
+  };
+
+/*You can also declare a set by entering the a value array as a parameter directly
+in the new Set() declaration rather than adding each one individually with the .add()
+method.*/
   const students = new Set(['Wes', 'Kara', 'Tony']);
 
   const dogs = ['Snickers', 'Sunny'];
   const dogSet = new Set(dogs);
+
+//My Example:
+
+const tacos = new Set();
+tacos.add('Chicken');
+tacos.add('Pork');
+tacos.add('Beef');
+tacos.add('Fish');
+tacos.add('Bacon');
+
+tacos.delete('Pork');
+
+for(let taco of tacos) {
+  console.log(taco);
+};
+
 
 </script>
 </body>

@@ -6,14 +6,41 @@
 </head>
 <body>
 <script>
-  let dog1 = { name: 'Snickers', age: 3 };
-  let dog2 = { name: 'sunny', age: 1 };
+
+/*WeakSets are similar to Sets, however the only value type that they can contain
+are obects.  Also, you can't iterate(loops,etc) over the values in a WeakSet. Another
+difference is that WeakSets do not have a .clear method on them.  Instead, it will
+garbage collect any value that has been deleted from the code.  In the
+example below, dog1 is set to null and will then be automatically removed (garbage
+collected from the code.  If I console.log weaksauce a few seconds after setting
+the value of dog1 to null, then I will see that dog1 has been removed from the
+WeakSet. */
+
+  let dog1 = { name: 'Snickers', age: 3};
+  let dog2 = { name: 'Sunny', age: 1};
 
   const weakSauce = new WeakSet([dog1, dog2]);
 
   console.log(weakSauce);
   dog1 = null;
   console.log(weakSauce);
+
+//My Example:
+
+  let car1 = { model: 'Chevy', make: 'Colorado' };
+  let car2 = { model: 'Pontiac', make: 'TransAm' };
+  let car3 = { model: 'Acura', make: 'NSX' };
+
+  const garage = new WeakSet([car1, car2, car3]);
+
+  console.log(garage);
+  car3 = null;
+  /*Waits 10 seconds and console.logs garage again to show that car3 has been
+  garbage collected*/
+  setTimeout(function() {
+    console.log(garage);
+  }, 10000);
+
 
 </script>
 </body>
