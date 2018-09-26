@@ -8,6 +8,20 @@
       font-size: 50px;
       margin:10px;
     }
+
+    .myExample {
+      display: flex;
+      margin-top: 75px;
+    }
+
+    .myExample button {
+      flex:1;
+      transition: transform .75s;
+    }
+
+    .myExample button:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -18,18 +32,56 @@
 <button>Flamin' 🔥</button>
 <button>Dancer 💃</button>
 
+<div class='myExample'>
+  <button>BBQ</button>
+  <button>Pizza</button>
+  <button>Wings</button>
+  <button>Tacos</button>
+  <button>Burgers</button>
+</div>
+
 <script>
+
+/*With objects, the keys can ony be strings or symbols.  However, with Maps you can actually
+use an object as a key.  In fact, according to the MDN documention, the keys for a
+Map can be any value.  In this example, Wes demonstrates how Maps can be
+used to store data about an object without changing the object itself. Each button
+is represented by an object stored as a key of the clickCounts Map. Each button object
+has a key titled 'val' that keeps track of how many times the button has been clicked .*/
+
   const clickCounts = new Map();
   const buttons = document.querySelectorAll('button');
 
   buttons.forEach(button => {
+    //sets each button as a key on the clckCounts Map
     clickCounts.set(button, 0);
     button.addEventListener('click', function() {
       const val = clickCounts.get(this);
+    //the button's val property increases by one every time the button is clicked.
       clickCounts.set(this, val + 1);
       console.log(clickCounts);
+    })
+  });
+
+
+
+
+//My Example:
+
+  const myExample = document.querySelector('.myExample');
+  const myButtons = myExample.querySelectorAll('button');
+  const foodVote = new Map();
+
+  myButtons.forEach(button => {
+    foodVote.set(button, 0);
+    button.addEventListener('click', function() {
+      const votes = foodVote.get(this);
+      foodVote.set(this, votes + 1);
+      console.log(foodVote);
     });
   });
+
+
 </script>
 </body>
 </html>

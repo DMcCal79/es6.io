@@ -13,6 +13,12 @@
 <body>
 
 <script>
+
+/*Weak maps are similar to weak sets in that they are not iterable and will
+garbage collect anything that is not being used.  Again, you
+can use objects as keys with maps. Weak Maps also do not have a size.  If I
+were to run weak.size the I would get 'undefined'.*/
+
   let dog1 = { name: 'Snickers' };
   let dog2 = { name: 'Sunny' };
 
@@ -22,8 +28,28 @@
   strong.set(dog1, 'Snickers is the best!');
   weak.set(dog2, 'Sunny is the 2nd best!');
 
+  //strong will continued to conatin dog1 eventhough it is now null
   dog1 = null;
+  //garbage collection will occur and dog2 will be removed weak
   dog2 = null;
+
+
+//My Example:
+let car1 = { model: 'Corvette' };
+let car2 = { model: 'Camaro' };
+
+const strongGarage = new Map();
+const weakGarage = new WeakMap();
+
+strongGarage.set(car1, '425 horsepower');
+weakGarage.set(car2, '400 horsepower');
+
+car1 = null;
+car2 = null;
+
+
+
+
 
 </script>
 </body>
