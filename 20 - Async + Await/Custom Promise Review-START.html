@@ -7,6 +7,69 @@
 
 <body>
   <script>
+    function breath(amount) {
+      return new Promise((resolve, reject) => {
+        if(amount < 500) {
+          reject('That is too small of a value');
+        }
+        setTimeout(() => resolve(`Done for ${amount}ms`), amount);
+      });
+    };
+
+      breath(1000)
+      .then(res => {
+        console.log(res);
+        return breath(2000);
+      })
+      .then(res => {
+        console.log(res);
+        return breath(3000);
+      })
+      .then(res => {
+        console.log(res);
+        return breath(4000);
+      })
+      .then(res => {
+        console.log(res);
+        return breath(500);
+      })
+      .then(res => {
+        console.log(res);
+        return breath(800);
+      })
+      .then(res => {
+        console.log(res);
+        return breath(4000);
+      })
+      .then(res => {
+        console.log(res);
+        return breath(2000);
+      })
+      .catch(err =>{
+        console.error(err);
+        console.error(`You really messed up this time!`)
+      })
+//My Example:
+
+// function cakeOrder(flavor) {
+//   return new Promise((resolve,reject) => {
+//     if(flavor.match(/vanilla/gi)) {
+//       resolve(flavor);
+//     } else {
+//     reject(flavor);
+//   }
+//   })
+// };
+//
+// cakeOrder('Vanilla')
+// .then(flavor => flavor)
+// .then(flavor => {
+//   console.log(`Your ${flavor} cake is on the way!`);
+// })
+// .catch(flavor => {
+//   console.error(`Sorry, we do not have ${flavor} cake`);
+// })
+
 
   </script>
 </body>

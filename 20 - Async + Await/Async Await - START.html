@@ -8,6 +8,90 @@
 <body>
   <script>
 
+/*The Async Await API is built upon promises.  However, it does not require .then
+statements and is less 'call-backy'.  Your first declare a function with the word
+async typed in front of the function name.  You then list each Promise to be executed
+preceeded by the word await into the body of the async function.  Each promise will run
+in order one at time once the previous function resolves similar to how generators
+operate.*/
+
+  function breath(amount) {
+    return new Promise((resolve, reject) => {
+      if(amount < 500) {
+        reject('That is too small of a value');
+      }
+      setTimeout(() => resolve(`Done for ${amount}ms`), amount);
+    });
+  };
+
+/*Here a higher order function is used to .catch any errors.  Wes explained that
+this is a great technique to use if each promise will throw the same type of error.
+However, if each promise has a unique type of possible error then it may be better
+to use a try & catch.*/
+
+  function catchErrors(fn) {
+    return function(...args) {
+      return fn(...args).catch((err) => {
+        console.error('Whoops!');
+        console.error(err);
+      })
+    }
+  };
+
+
+/*In Wes's example below, the result of each breath() call is stored in a variable
+so that it can be displayed in the console.*/
+  async function go(first,last) {
+      console.log(`You are next ${first} ${last}!`);
+      var res = await breath(3000);
+      console.log(res);
+      var res = await breath(2000);
+      console.log(res);
+      var res = await breath(500);
+      console.log(res);
+      var res = await breath(4000);
+      console.log(res);
+      var res = await breath(700);
+      console.log(res);
+      var res = await breath(5000);
+      console.log(res);
+      console.log('end');
+  };
+
+  const wrap = catchErrors(go);
+
+
+
+//My Example:
+
+/*Customer provides their name and drink selection.  If they don't give their name
+& drink selection then we can't fulfill their order as the promise will reject.*/
+//   function cuppaJoe(name, drink) {
+//     return new Promise((resolve, reject) => {
+//       if(arguments.length > 1) {
+//         return setTimeout(()=> resolve(`${name}, your ${drink} is ready at the bar.`), 3000);
+//       }
+//         reject('Sorry, but we will need more info to complete your order.');
+//     })
+//   };
+//
+// /*Customer order is captured in a variable and returned to the console.*/
+//   async function coffeeTime() {
+//     console.log('Coffee shop is open!');
+//     var order = await cuppaJoe('Dave', 'iced coffee');
+//     console.log(order);
+//     var order = await cuppaJoe('Cynthia', 'chai latte');
+//     console.log(order);
+//     var order = await cuppaJoe('Adalyn', 'chocolate milk');
+//     console.log(order);
+//     var order = await cuppaJoe('Angus', 'earl gray tea');
+//     console.log(order);
+//     console.log('Coffee shop is now closed!');
+//   };
+//
+//   coffeeTime();
+
+
   </script>
 </body>
 

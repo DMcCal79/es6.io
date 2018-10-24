@@ -9,6 +9,32 @@
 
 <body>
   <script>
+    // fetch('https://api.github.com/users/wesbos')
+    //   .then(res => {
+    //     return res.json();
+    //   })
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.error('Ahhh...we have a little problem here.');
+    //     console.error(err);
+    //   })
+
+    const video = document.querySelector('.handsome');
+/*MediaDevices provides access to the connected input devices such as microphones
+and cameras. Calling the getUserMedia mehthod returns a promise if the user grants
+permission for access to the device when prompted.  If the user denies permission,
+then the promise is rejected.*/
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(mediaStream => {
+        video.srcObject = mediaStream;
+        video.load();
+        video.play();
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
   </script>
 </body>

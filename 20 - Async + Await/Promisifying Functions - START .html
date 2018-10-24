@@ -7,6 +7,57 @@
 
 <body>
   <script>
+//     navigator.geolocation.getCurrentPosition(function(pos) {
+//       console.log('Here we go!');
+//       console.log(pos);
+//     }, function(err) {
+//       console.log('Whoops!');
+//       console.log(err)
+// });
+/*The navigator.geoLocation.getCurrentPosition() API normally takes two callback
+functions as arguments: a success callback and an error callback as seen above. In
+the example below, Wes shows how it can be re-written as a Promise and then executed
+in an async/await. When re-writtin as a Promise, the only arguments needed are resolve
+and reject instead of callbacks.  Since the getCurrentPosition() API allows you
+to pass in an optional PositionOptions object, the ...args rest operator is there
+to catch any options that may be passed in.*/
+
+  function getCurrentPosition(...args) {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(...args, resolve, reject);
+    });
+  };
+
+  async function go() {
+    console.log('starting');
+    const pos = await getCurrentPosition();
+    console.log(pos);
+    console.log('finished');
+  };
+
+go();
+
+//MyExample:
+
+/*Here the setTimeout below is converted to a Promise that takes as an argument the
+time (miliseconds) to elapse before the 'Your time is now up' console.logs:
+
+ setTimeout(()=> console.log('Bingo!'),3000);
+*/
+
+function timesUp(time){
+  return new Promise((resolve,reject) => {
+    console.log(`You have ${time/1000} seconds.`);
+    setTimeout(()=> resolve('Your time is now up!'), time);
+  })
+};
+
+async function hurryUp(time) {
+  var countDown = await timesUp(time);
+  console.log(countDown);
+};
+
+hurryUp(7000);
 
   </script>
 </body>

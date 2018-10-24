@@ -7,12 +7,176 @@
 
 <body>
   <script>
-    async function go() {
+      /*In this example, Wes is shows several different ways to to async & await to
+      fire multiple fetch requests at the same time. In the first example below, a .then
+      is immediately attached to each to fetch so that the json can be returned in one step.
+      Both fetch requests are then fired in the Promise.all and the json is returned once
+      both promises are resolved. Both responses are in an array.*/
+
+      async function go() {
+      const p1 = fetch('https://api.github.com/users/wesbos').then(data => data.json());
+      const p2 = fetch('https://api.github.com/users/stolinski').then(data => data.json());
+      //Wait for both of them to resolve
+      const res = await Promise.all([p1, p2]);
+      console.log(res);
+    };
+      go();
+
+      /*In this second example, .map is used to create the second Promise.all to retrieve
+      the json.  Instead of attaching a .then to each fetch, the initial data returned from the
+      first Promise.all is mapped over and a new Promise is created with the .json() attached. These
+      new promises are then executed in a second Promise.all and the json for both is again returned
+      in an array which is destructred to the Wes and Scott varibales. */
+
+      async function goTwo() {
       const p1 = fetch('https://api.github.com/users/wesbos');
       const p2 = fetch('https://api.github.com/users/stolinski');
-    }
+      // Wait for both of them to resolves
+      const res = await Promise.all([p1, p2]);
+      const dataPromises = res.map(r => r.json());
+      const [ Wes, Scott ] = await Promise.all(dataPromises);
+      console.log(Wes, Scott);
+    };
+      goTwo();
 
-    go();
+
+      /*This third example is a hybrid of the previous two techniques. The getData function
+      can take in an array of github names and then pass them to a fetch request to the github API.
+      Each newly created fetch request is stored in the promises variable which is an array.
+
+      Next, the promises array is then mapped over and each fetch request is returned
+      with a .json() attached.
+
+      Finally, the promises array is then passed into the Promise.all(promises) and the
+      data returned is stored in the people variable. */
+
+      async function getData(names) {
+          const promises = names.map(name => fetch(`https://api.github.com/users/${name}`).then(r => r.json()));
+          const people = await Promise.all(promises);
+          console.log(people);
+      };
+
+        getData(['wesbos', 'stolinski']);
+
+
+    //My Examples:
+    async function fire() {
+      const myProfile = fetch('https://api.github.com/users/DMcCal79').then(data => data.json());
+      const hans = fetch('https://api.discogs.com/artists/59656').then(data => data.json());
+      const bundle = await Promise.all([myProfile, hans]);
+      console.log(bundle);
+
+    };
+    fire();
+
+
+    async function fireTwo() {
+      const myProfile = fetch('https://api.github.com/users/DMcCal79');
+      const hans = fetch('https://api.discogs.com/artists/59656');
+      const bundle = await Promise.all([myProfile, hans]);
+      const finalBundle = bundle.map(data => data.json());
+      const [ daveProf, hansZimmer ] = await Promise.all(finalBundle);
+      console.log(daveProf, hansZimmer);
+    };
+    fireTwo();
+
+    async function fireThree(github, musicianId) {
+      const myProfile = fetch(`https://api.github.com/users/${github}`);
+      const hans = fetch(`https://api.discogs.com/artists/${musicianId}`);
+      const fetches = [myProfile, hans].map(requests => requests.json());
+      const fetchesFinal = await Promise.all(fetches);
+      console.log(fetchesFinal);
+    };
+    fire('DMcCal79', '59656');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </script>
 </body>
 
