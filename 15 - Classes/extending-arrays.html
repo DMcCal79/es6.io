@@ -63,62 +63,31 @@ const letsEat = new Dinner('boneless',
 );
 
 
+//Another example:
 
 
+class Climate extends Array {
+  constructor(title, ...cities) {
+    super(...cities);
+    this.title = title;
+  }
 
+  nextStop(location) {
+    this.push(location);
+  }
 
+  chosenStops(limit = 4) {
+    return this.sort((a,b) => a.temp > b.temp ? -1:1).slice(0,limit)
+  }
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const trip = new Climate('winter',
+{name:'Cleveland', temp: 35},
+{name:'Dallas', temp: 57},
+{name: 'Austin', temp: 45},
+{name: 'Seattle', temp: 38},
+{name:'Denver', temp: 30}
+);
 
 
 </script>

@@ -47,8 +47,28 @@ weakGarage.set(car2, '400 horsepower');
 car1 = null;
 car2 = null;
 
+//Another Example:
 
+const strongZa = new Map();
+const weakZa = new WeakMap();
 
+let pizza1 = { topping: 'pepperoni' };
+let pizza2 = { topping: 'ham' };
+
+strongZa.set(pizza1, 'XL');
+weakZa.set(pizza2, 'large');
+
+console.log(strongZa);
+console.log(weakZa);
+
+pizza2 = null;
+
+console.log(strongZa);
+/*pizza2 is now null and is garbage collected by the time weakZa is logged to
+the console 10 seconds later. */
+setTimeout(()=> {
+  console.log(weakZa);
+},10000);
 
 
 </script>

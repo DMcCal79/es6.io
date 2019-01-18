@@ -142,6 +142,56 @@ Promise
   });
 
 
+//Another example for the road:
+
+const QB = [
+  {first:'Drew', last:'Brees', team:'Saints'},
+  {first:'Baker', last:'Mayfield', team:'Browns'},
+  {first:'Dak', last:'Prescott', team:'Cowboys'}
+];
+
+const RB = [
+  {first:'Ezekiel', last:'Elliot', team:'Cowboys'},
+  {first:'Adrian', last:'Petterson', team:'Redskins'},
+  {first:'Lamar', last:'Miller', team:'Texans'}
+];
+
+const WR = [
+  {first:'Amari', last:'Cooper', team:'Cowboys'},
+  {first:'Dez', last:'Bryant', team:'Saints'},
+  {first:'Jarvis', last:'Landry', team:'Browns'}
+];
+
+const qBacks = new Promise((resolve,reject) => {
+  setTimeout(()=> {
+    resolve(QB);
+    reject(Error('QB\'s not found'));
+  },2000);
+});
+
+const rBacks = new Promise((resolve,reject) => {
+  setTimeout(()=> {
+    resolve(RB);
+    reject(Error('RB\'s not found.'));
+  },1000);
+});
+
+const wRec = new Promise((resolve,reject) => {
+  setTimeout(()=> {
+    resolve(WR);
+    reject(Error('WR\'s not found.'));
+  },5000);
+});
+
+Promise.all([qBacks, rBacks, wRec])
+  .then(data => {
+    const [ Quarterbacks, RunningBacks, WideReceivers ] = data;
+    console.log(RunningBacks.map(rb => `${rb.first} ${rb.last} of the ${rb.team}`));
+    console.log(WideReceivers.map(wr => `${wr.first} ${wr.last} of the ${wr.team}`));
+    console.log(Quarterbacks.map(qb => `${qb.first} ${qb.last} of the ${qb.team}`));
+  })
+  .catch(err => console.log(err));
+
 </script>
 </body>
 </html>

@@ -20,6 +20,8 @@
   </div>
   <div class='facts'>
   </div>
+  <div class='tacos'>
+  </div>
 
 
 <script>
@@ -138,6 +140,40 @@ const facts = document.querySelector('.facts');
 const p4 = document.createElement('p');
 p4.innerHTML = nuggets;
 facts.appendChild(p4);
+
+
+//One more for the road...
+
+const tacoMeat = {
+  carnitas: 'spicy pork',
+  barbacoa: 'spicy beef',
+  pollo: 'chicken'
+};
+
+const shellOne = "crunchy";
+const shellTwo = "soft";
+
+function meatDef(strings, ...values) {
+  const meats = values.map(value => {
+    if(tacoMeat[value]) {
+      return `<abbr title ="${tacoMeat[value]}">${value}</abbr>`;
+    }
+    return value;
+  });
+  return strings.reduce((sentence,string,i) => {
+    return `${sentence}${string}${meats[i] || ''}`;
+  },'');
+};
+
+const tacoOrder = meatDef `When you order a taco, you start off telling them whether you
+want a ${shellOne} or ${shellTwo} shell.  Next, you tell them what type of
+meat you want. You can have either ${'carnitas'}, ${'barbacoa'}, or ${'pollo'}.`;
+
+const tacos = document.querySelector('.tacos');
+const p5 = document.createElement('p');
+p5.innerHTML = tacoOrder;
+tacos.appendChild(p5);
+
 
 </script>
 </body>

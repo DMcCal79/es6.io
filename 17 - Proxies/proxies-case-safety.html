@@ -49,27 +49,29 @@ const lunchOrder = {
 const tacoProxy  = new Proxy(taco, lunchOrder);
 
 
+//Another example:
 
+const pizza = {
+  crust: 'thin',
+  topping: 'pepperoni',
+  size: 'large'
+};
 
+const pizzaHandler = {
+  set(target,prop,value) {
+    const propertyCk = Object.keys(target).find(key => {
+      return key.toLowerCase() === prop.toLowerCase();
+    });
+    if(!(prop in target) && propertyCk) {
+      throw new Error(`Sorry, it looks like the property ${prop} closely resembles
+        the property ${propertyCk}. Please choose a different property name.`);
+    } else {
+      target[prop] = value;
+    }
+  }
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const pizzaProxy = new Proxy(pizza, pizzaHandler);
 
 
 

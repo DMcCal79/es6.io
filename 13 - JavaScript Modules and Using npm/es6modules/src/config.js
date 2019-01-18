@@ -24,5 +24,5 @@ const snack = 'nachos';
 export { pizza, coffee, snack as chips };
 
 /*Using 'as' will allow me to export the item under a different name.  For example,
-her I am exporting the const snack under the name chips.  It will then  be imported
+here I am exporting the const snack under the name chips.  It will then  be imported
 as chips in app.js*/

@@ -88,7 +88,31 @@ const pizzaProxy = new Proxy(pizza, {
 
 pizzaProxy.crust = 'thick';
 pizzaProxy.vegetables = 'green peppers';
-    personProxy.name = 'Wesley';
+personProxy.name = 'Wesley';
+
+//Another example:
+
+const team = {
+  city: 'Dallas',
+  name: 'Cowboys',
+  division: 'NFC east'
+};
+
+const teamProxy = new Proxy(team, {
+  get(target,prop) {
+    return target[prop].toUpperCase();
+  },
+  set(target,prop,value) {
+    target[prop] = Array.from(value)
+      .reverse()
+      .join('');
+  }
+});
+
+teamProxy.name;
+teamProxy.QB = 'Prescott';
+
+
 </script>
 </body>
 </html>

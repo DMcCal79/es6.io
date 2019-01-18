@@ -89,6 +89,33 @@
     };
     fire('DMcCal79', '59656');
 
+    //How about some more practice:
+
+    async function music(artist1, artist2) {
+      const firstArtist = fetch(`https://api.discogs.com/artists/${artist1}`).then(info => info.json());
+      const secondArtist = fetch(`https://api.discogs.com/artists/${artist2}`).then(info => info.json());
+      const [ firstChoice, secondChoice ] = await Promise.all([firstArtist, secondArtist]);
+      console.log(`The first musician that will be listened to is ${firstChoice.name}.`);
+      console.log(`After ${firstChoice.name}, we will then listen to ${secondChoice.name}.`);
+    };
+    //Will return Hans Zimmer and U2.
+    music('59656', '6520');
+
+
+
+    //One more for the road:
+
+    async function artistNames(...artistIDs) {
+      const roundEmUp = artistIDs.map(artist => {
+        return fetch(`https://api.discogs.com/artists/${artist}`).then(info => info.json());
+      });
+      console.log(roundEmUp);
+      const findEm = await Promise.all(roundEmUp);
+      const names = findEm.map(artist => artist.name);
+      console.log(names);
+    };
+    //Will return Hans Zimmer, U2, M83, Alter Bridge
+    artistNames('59656', '6520', '33591', '713239');
 
 
 

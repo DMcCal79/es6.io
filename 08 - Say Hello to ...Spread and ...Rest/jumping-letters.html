@@ -30,11 +30,21 @@
   <h2 class="jump">SPREADS!</h2>
 
 <script>
+
 //My way:
-  const letters = document.querySelector('.jump');
-  letters.innerHTML = [...letters.textContent].map(letter => {
+  const title = document.querySelector('.jump');
+  const letters = Array.from(title.textContent, letter => {
     return `<span>${letter}</span>`;
-  }).join('');
+  });
+  title.innerHTML = [...letters].join('');
+
+
+
+//My other way:
+  // const letters = document.querySelector('.jump');
+  // letters.innerHTML = [...letters.textContent].map(letter => {
+  //   return `<span>${letter}</span>`;
+  // }).join('');
 
 //Wes's way:
     // const heading = document.querySelector('.jump');
@@ -43,67 +53,6 @@
     // function sparanWrap(word) {
     //   return [...word].map(letter => `<span>${letter}</span>`).join('')
     // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 </body>

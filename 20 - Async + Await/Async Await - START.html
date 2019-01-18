@@ -41,24 +41,24 @@ to use a try & catch.*/
 
 /*In Wes's example below, the result of each breath() call is stored in a variable
 so that it can be displayed in the console.*/
-  async function go(first,last) {
-      console.log(`You are next ${first} ${last}!`);
-      var res = await breath(3000);
-      console.log(res);
-      var res = await breath(2000);
-      console.log(res);
-      var res = await breath(500);
-      console.log(res);
-      var res = await breath(4000);
-      console.log(res);
-      var res = await breath(700);
-      console.log(res);
-      var res = await breath(5000);
-      console.log(res);
-      console.log('end');
-  };
-
-  const wrap = catchErrors(go);
+  // async function go(first,last) {
+  //     console.log(`You are next ${first} ${last}!`);
+  //     var res = await breath(3000);
+  //     console.log(res);
+  //     var res = await breath(2000);
+  //     console.log(res);
+  //     var res = await breath(500);
+  //     console.log(res);
+  //     var res = await breath(4000);
+  //     console.log(res);
+  //     var res = await breath(700);
+  //     console.log(res);
+  //     var res = await breath(5000);
+  //     console.log(res);
+  //     console.log('end');
+  // };
+  //
+  // const wrap = catchErrors(go);
 
 
 
@@ -90,6 +90,78 @@ so that it can be displayed in the console.*/
 //   };
 //
 //   coffeeTime();
+
+//Another Example:
+
+// function strike(seconds) {
+//   return new Promise((resolve,reject) => {
+//     if(seconds) {
+//       return setTimeout(()=> {
+//         resolve(`The lightning strike was approximately ${seconds} miles away.`);
+//       }, (seconds * 1000));
+//     }
+//     reject('Please enter the number of seconds elapsed from the lightning flash to hearing thunder.');
+//   });
+//   };
+//
+// async function distance() {
+//   var dist = await strike(3);
+//   console.log(dist);
+//   var dist = await strike(5);
+//   console.log(dist);
+//   var dist = await strike(2);
+//   console.log(dist);
+//   var dist = await strike(1);
+//   console.log(dist);
+//   var dist = await strike(4);
+//   console.log(dist);
+//   var dist = await strike(4);
+//   console.log(dist);
+// };
+//
+// distance();
+
+
+
+
+//How about another example:
+
+/*In this example, a try catch is used to catch the error and log it to the
+console. */
+
+function alarm(snooze) {
+  return new Promise((resolve,reject) => {
+    if(snooze >2) {
+      return setTimeout(()=> {
+        resolve(`You have snoozed an extra ${snooze} seconds.`);
+      }, (snooze * 1000))};
+        reject(`Snooze time must be greater than 2 seconds. You have entered ${snooze} seconds.`);
+    });
+  };
+
+async function wakeUp() {
+  try {
+    var beep = await alarm(3);
+    console.log(beep);
+    var beep = await alarm(3);
+    console.log(beep);
+    var beep = await alarm(5);
+    console.log(beep);
+    var beep = await alarm(2);
+    console.log(beep);
+    var beep = await alarm(4);
+    console.log(beep);
+    var beep = await alarm(6);
+    console.log(beep);
+    var beep = await alarm(5);
+    console.log(beep);
+  }
+  catch(err) {
+    console.error(err);
+  }
+};
+
+wakeUp();
 
 
   </script>

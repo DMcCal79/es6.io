@@ -89,6 +89,26 @@ const garage = {
   [make.shift()]: paint(model.shift())
 };
 
+
+//Another example:
+
+const sauce = ['buffalo', 'bbq', 'garlic', 'spicy'];
+const events = ['Birthday','Christmas', 'New Years', 'Super Bowl'];
+const food = ['wings', 'ribs', 'chicken', 'burritos'];
+
+function meal(food) {
+  return `${sauce.shift()} ${food}`;
+};
+
+const mealPlan = {
+  [events.shift()]: meal(food.shift()),
+  [events.shift()]: meal(food.shift()),
+  [events.shift()]: meal(food.shift()),
+  [events.shift()]: meal(food.shift())
+};
+
+
+
 </script>
 </body>
 </html>

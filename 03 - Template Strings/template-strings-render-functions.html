@@ -7,6 +7,8 @@
 <body>
   <div class="wesExample"></div>
   <div class="myExample"></div>
+  <div class="myExample2"></div>
+
 <script>
   const beer = {
     name: 'Belgian Wit',
@@ -63,6 +65,68 @@ cleaner by avoiding having multiple template strings running within eachother.*/
 
     const carList = document.querySelector('.myExample');
     carList.innerHTML = myMarkup;
+
+
+  //Another Exmaple:
+  const wings = {
+    style: 'boneless',
+    sauces: ['buffalo','bbq','garlic']
+  };
+
+  function lunchOrder(meal) {
+    return `<ul class='choice'>
+      ${meal.map(food =>`<li>${food}</li>`).join('')}
+    </ul>`
+  }
+
+  const myMarkup2 = `
+    <div class='letsEat'>
+      <h2>${wings.style} Order</h2>
+      ${lunchOrder(wings.sauces)}
+    </div>
+    `;
+
+  const myExample2 = document.querySelector('.myExample2');
+  myExample2.innerHTML = myMarkup2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>

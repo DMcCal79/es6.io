@@ -9,6 +9,11 @@
     <p>Kait</p>
     <p>Snickers</p>
   </div>
+  <div class="food">
+    <p>Wings</p>
+    <p>Pizza</p>
+    <p>Burgers</p>
+  </div>
 <body>
 <script>
 
@@ -18,7 +23,7 @@ Array.from(people) will convert const people from a node list to a true array.*/
   const people = document.querySelectorAll('.people p');
 /*Array.from allows you to to pass a map function as a second argument so that you
 can go ahead and run the map function without having to first store the newly
-created array in a separate variable first.*/  
+created array in a separate variable first.*/
   const peopleArray = Array.from(people, person => {
     return person.textContent;
   });
@@ -40,6 +45,13 @@ array so theat .reduce() and be applied to it.*/
   you pass in.*/
   const ages = Array.of(12,4,23,62,34);
   console.log(ages);
+
+  //My Example:
+
+  const meal = document.querySelectorAll('.food p');
+  const dinner = Array.from(meal, plate => plate.textContent);
+  console.log(dinner);
+
 
 </script>
 </body>

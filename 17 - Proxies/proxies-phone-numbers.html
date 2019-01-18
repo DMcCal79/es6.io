@@ -43,6 +43,24 @@ const lockerComb = new Proxy({}, lockerHandler);
 lockerComb.combination = '12-1314';
 
 
+
+//Another example:
+
+const dayHandler = {
+  //Date entered in mm/dd/yyyy format is stored as mmddyyyy
+  set(target,prop,value) {
+    target[prop] = value.match(/[0-9]/g).join('');
+  },
+  //Date is retrieved in mm-dd-yyyy format
+  get(target,prop) {
+    return target[prop].replace(/(\d{2})(\d{2})(\d{4})/,'$1-$2-$3');
+  }
+};
+
+const dayProxy = new Proxy({},dayHandler);
+dayProxy.someday = '11/26/2018';
+
+
 </script>
 </body>
 </html>

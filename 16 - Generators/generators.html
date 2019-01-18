@@ -83,69 +83,22 @@ const starters = lineup(tribe);
 
 
 
+//Another example:
+const garage = [
+  {make:'Chevy', model:'Corvette' },
+  {make:'Pontiac', model:'Trans Am' },
+  {make:'Dodge', model:'Challenger' },
+  {make:'Acura', model:'NSX' },
+  {make:'Chevy', model:'Camaro' }
+];
 
+function* checkCars(rides) {
+  for(const ride of rides) {
+    yield ride;
+  };
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const rollin = checkCars(garage);
 
 
 </script>

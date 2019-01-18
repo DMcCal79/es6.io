@@ -58,16 +58,18 @@ Transformer.prototype.transform = function() {
   console.log(`I can turn into a ${this.altMode}.`);
 };
 
+//Another example:
+function Car(make,model,year) {
+  this.make = make;
+  this.model = model,
+  this.year = year
+};
 
+const TransAm = new Car('Pontiac','TransAm',2002);
 
-
-
-
-
-
-
-
-
+Car.prototype.go = function() {
+  console.log('Vrrrroooooom');
+};
 
 
 

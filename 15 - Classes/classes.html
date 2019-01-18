@@ -80,6 +80,36 @@ class Pizza {
 const roni = new Pizza('large','thin','pepperoni');
 const bacon = new Pizza('medium', 'deep dish', 'bacon');
 
+// Another example:
+
+class Bbq {
+  constructor(meat,side) {
+    this.meat = meat;
+    this.side = side;
+  }
+
+  myMeal() {
+    console.log(`I am having the ${this.meat} with a side of ${this.side}. `)
+  }
+
+  static about() {
+    console.log('There is never a bad time to eat some bbq!')
+  }
+
+  set desert(choice) {
+    this.desertChoice = choice;
+  }
+
+  get desert() {
+    return `Time to eat my ${this.desert}`
+  }
+
+}
+const Dinner = new Bbq('ribs','beans');
+
+
+
+
 
 </script>
 </body>

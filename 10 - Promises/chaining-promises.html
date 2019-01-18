@@ -256,6 +256,59 @@ pizzaOrder('large')
   });
 
 
+//How about another example for the road:
+
+const cities = [
+  {name: 'Austin', state: 'TX', climate: 'hot'},
+  {name: 'Cleveland', state: 'OH', climate: 'cold'},
+  {name: 'Nashville', state: 'TN', climate: 'medium'},
+  {name: 'St. Paul', state: 'MN', climate: 'freezing'}
+];
+
+const gear = [
+  {item: 'fan', use: 'hot'},
+  {item: 'jacket', use: 'medium'},
+  {item: 'heater', use: 'freezing'},
+  {item: 'coat', use: 'cold'}
+];
+
+function whereToGo(climate) {
+  return new Promise((resolve,reject) => {
+    setTimeout(()=> {
+      const city = cities.find(city => city.climate === climate);
+      if(city) {
+        resolve(city);
+      } else {
+        reject(Error(`Sorry, ${climate} not found.`));
+      }
+    },3000)
+  })
+};
+
+function whatToBring(city) {
+  return new Promise((resolve,reject)=> {
+  const toBring = gear.find(item => item.use === city.climate);
+  if(toBring) {
+    city.pack = toBring.item;
+    resolve(city);
+  } else {
+    reject(Error('Opps, something broke.'));
+  }
+  })
+};
+
+
+whereToGo('hot')
+  .then(city => {
+    return whatToBring(city);
+  })
+  .then(city => {
+    console.log(`If you like ${city.climate} weather, then be sure to visit ${city.name}, ${city.state} and bring a ${city.pack}.`);
+  })
+  .catch(err=> console.log(err));
+
+
+
 </script>
 </body>
 </html>
